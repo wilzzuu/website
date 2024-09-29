@@ -1,13 +1,25 @@
+// src/App.jsx
 import React from 'react';
-import TodoList from './components/TodoList';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import TodoList from './pages/TodoList';
+import FinancialTracker from './pages/FinancialTracker';
+import WeekPlanner from './pages/WeekPlanner';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <h1>My ToDo List</h1>
-      <TodoList />
-    </div>
+    <Router>
+      <div>
+        <Navbar /> {/* Include the navigation bar on all pages */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/todo" element={<TodoList />} />
+          <Route path="/finance" element={<FinancialTracker />} />
+          <Route path="/weekplanner" element={<WeekPlanner />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
