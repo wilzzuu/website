@@ -16,7 +16,7 @@ function App() {
         <Navbar /> {/* Include the navigation bar on all pages */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/portfolio element" element={<Portfolio />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/todo" element={<TodoList />} />
           <Route path="/finance" element={<FinancialTracker />} />
           <Route path="/weekplanner" element={<WeekPlanner />} />
