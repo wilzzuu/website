@@ -20,8 +20,8 @@ jobs:
         run: |
           lftp -d -c "
           set ssl:verify-certificate no;
-          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_HOST }};
-          mirror -R --verbose --only-newer --parallel=10 ./ /home/wilzkpsl/repositories/website;
+          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }};
+          mirror -R --verbose --only-newer --parallel=10 ./dist /home/wilzkpsl/repositories/website;
           bye;
           "
 
