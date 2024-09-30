@@ -26,7 +26,7 @@ jobs:
           lftp -d -c "
           set ssl:verify-certificate no;
           open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }};
-          mirror -R --verbose --only-newer --parallel=10 ./ /public_html;
+          mirror -R --verbose --only-newer --parallel=10 ./dist /public_html;
           bye;
           "
 
