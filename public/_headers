@@ -1,0 +1,8 @@
+/*.js    text/javascript
+/*.mjs   text/javascript
+
+/finance
+  Basic-Auth: test:testpswd
+
+/other-private-page
+  Basic-Auth: test:testpswd
