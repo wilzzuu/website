@@ -1,4 +1,3 @@
-// src/pages/WeekPlanner.jsx
 import React from 'react';
 
 function WeekPlanner() {

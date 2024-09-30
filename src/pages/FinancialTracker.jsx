@@ -1,4 +1,3 @@
-// src/pages/FinancialTracker.jsx
 import React from 'react';
 
 function FinancialTracker() {

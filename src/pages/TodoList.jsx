@@ -1,4 +1,3 @@
-// src/pages/TodoList.jsx
 import React from 'react';
 
 function TodoList() {
