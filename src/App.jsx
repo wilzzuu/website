@@ -10,8 +10,11 @@ import TransactionList from './components/TransactionList';
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+{/*import Register from './pages/Register';*/}
 import Login from './pages/Login'
 import Portfolio from './pages/Portfolio';
+import AddProjectForm from './pages/AddProjectForm';
+import ProjectPage from './pages/ProjectPage';
 import TodoList from './pages/TodoList';
 import FinancialTracker from './pages/FinancialTracker';
 import WeekPlanner from './pages/WeekPlanner';
@@ -33,8 +36,18 @@ function App() {
                 <Navbar />
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        {/*<Route path="/register" element={<Register />} />*/}
                         <Route path="/login" element={<Login />} />
                         <Route path="/portfolio" element={<Portfolio />} />
+                        <Route path="/portfolio/:projectId" element={<ProjectPage />} />
+                        <Route
+                            path="/portfolio/addproject" 
+                            element={
+                                <PrivateRoute>
+                                    <AddProjectForm/>
+                                </PrivateRoute>
+                            } 
+                        />
                         <Route
                             path="/todo"
                             element={

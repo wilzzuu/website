@@ -6,7 +6,7 @@ import LogoutButton from './LogoutButton';
 import LoginButton from './LoginButton';
 
 function Navbar() {
-    const { currentUser } = useAuth();
+  const { currentUser } = useAuth();
   return (
     <nav>
       <ul>

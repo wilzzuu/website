@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore'; // Firebase Firestore functions
-import { db, auth } from '../firebase/firebase'; // Import the database and authentication from Firebase config
+import { db } from '../firebase/firebase'; // Import the database and authentication from Firebase config
 import { useAuth } from '../context/AuthContext'; // Import the context to get the current user
 
 export default function AddTransactionForm() {
@@ -9,8 +9,6 @@ export default function AddTransactionForm() {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
-
-  // Get the currently authenticated user from the context
   const { currentUser } = useAuth();
 
   // Form submission handler
@@ -23,10 +21,8 @@ export default function AddTransactionForm() {
       category,
       description,
       date: new Date(),
-      userId: String(auth.currentUser.uid), // Ensure `userId` is a string
+      userId: String(currentUser.uid), // Ensure `userId` is a string
     };
-  
-    console.log("Document Data:", documentData);
   
     try {
       await addDoc(collection(db, 'transactions'), documentData);
