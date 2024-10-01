@@ -2,14 +2,42 @@ import React, { useState } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useAuth } from '../context/AuthContext';
+import ImageUploadForm from './ImageUploadForm';
+import RichTextEditor from '../components/RichTextEditor';
 
-export default function AddProjectForm() {
+const AddProjectForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [deepdive, setDeepdive] = useState('');
   const [route, setRoute] = useState('');
+  const [cardImage, setCardImage] = useState('');
+  const [imageURLs, setImageURLs] = useState(['']);
   const { currentUser } = useAuth();
-  
+
+  const handleCardImageChange = (e) => {
+    setCardImage(e.target.value);
+  };
+
+  const handleImageUploadComplete = (uploadedUrls) => {
+    setImageURLs(uploadedUrls);
+  };
+
+  const handleImageURLChange = (index, e) => {
+    const newImageURLs = [...imageURLs];
+    newImageURLs[index] = e.target.value;
+    setImageURLs(newImageURLs);
+  };
+
+  const addImageField = () => {
+    if (imageURLs.length < 10) {
+      setImageURLs([...imageURLs, '']);
+    }
+  };
+
+  const removeImageField = (index) => {
+    const newImageURLs = imageURLs.filter((_, idx) => idx !== index);
+    setImageURLs(newImageURLs);
+  };
   const handleAddProject = async (e) => {
     e.preventDefault();
 
@@ -21,8 +49,10 @@ export default function AddProjectForm() {
     const newProject = {
       title,
       description,
-      image,
+      deepdive,
       route,
+      cardImage,
+      images: imageURLs.filter((url) => url !== ''),
       createdAt: serverTimestamp(),
       createdBy: String(currentUser.uid),
       userEmail: currentUser.email,
@@ -57,22 +87,49 @@ export default function AddProjectForm() {
           onChange={(e) => setDescription(e.target.value)}
           required
         ></textarea>
+        <h3>Project Deep Dive</h3>
+        <RichTextEditor value={deepdive} onChange={(e) => setDeepdive(e.target.value)}/>
         <input
           type="text"
-          placeholder="Image URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          required
+          placeholder="Card Image URL"
+          value={cardImage}
+          onChange={handleCardImageChange}
         />
+        <h3>Project Image URLs (1-10)</h3>
+        {imageURLs.map((url, index) => (
+            <div key={index}>
+                <input
+                type="text"
+                placeholder={`Image URL ${index + 1}`}
+                value={url}
+                onChange={(e) => handleImageURLChange(index, e)}
+                />
+                <button type="button" onClick={() => removeImageField(index)}>
+                    Remove
+                </button>
+            </div>
+        ))}
+        {imageURLs.length > 0 && (
+          <div>
+            <h3>Uploaded Image URLs</h3>
+            <ul>
+              {imageURLs.map((url, index) => (
+                <li key={index}>{url}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <input
           type="text"
-          placeholder="Unique Route (e.g., inventory-management-system)"
+          placeholder="Unique Route"
           value={route}
           onChange={(e) => setRoute(e.target.value)}
           required
         />
         <button type="submit">Add Project</button>
       </form>
+      <ImageUploadForm onUploadComplete={handleImageUploadComplete} />
     </div>
   );
 };
+export default AddProjectForm;

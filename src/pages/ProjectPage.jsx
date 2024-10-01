@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import Carousel from '../components/Carousel';
 
 const ProjectPage = () => {
   const { projectId } = useParams(); // Get the dynamic route parameter
@@ -14,7 +15,6 @@ const ProjectPage = () => {
     const fetchProject = async () => {
       try {
         const projectRef = collection(db, 'projects'); // Reference to the specific project document
-        console.log("projectRef:", projectRef);
         const q = query(projectRef, where('route', '==', projectId)); // Get the document snapshot
         const querySnapshot = await getDocs(q);
 
@@ -36,19 +36,15 @@ const ProjectPage = () => {
     fetchProject();
   }, [projectId]);
 
-  if (loading) {
-    return <div>Loading project...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  if (loading) {return <div>Loading project...</div>;}
+  if (error) {return <div>{error}</div>;}
 
   return (
     <div style={styles.container}>
       <h1>{project.title}</h1>
-      <img src={project.image} alt={project.title} style={styles.image} />
       <p>{project.description}</p>
+      {project.images ? <Carousel images={ project.images } style={styles.image}/> : <p>No images to display</p>}
+      <div dangerouslySetInnerHTML={{ __html: project.deepdive }} />
     </div>
   );
 };
@@ -60,7 +56,8 @@ const styles = {
     margin: '0 auto',
   },
   image: {
-    width: '100%',
+    width: '200px',
+    height: '300px',
     borderRadius: '8px',
     marginBottom: '20px',
   },

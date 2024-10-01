@@ -53,7 +53,7 @@ const Portfolio = () => {
         {projects.map((project) => (
           <div key={project.id} style={styles.card}>
             <Link to={`/portfolio/${project.route}`} style={styles.link}>
-              <img src={project.image} alt={project.title} style={styles.image} />
+              <img src={project.cardImage} alt={project.title} style={styles.image} />
               <h2>{project.title}</h2>
               <p>{project.description}</p>
             </Link>
@@ -81,7 +81,7 @@ const styles = {
     gap: '20px',
   },
   card: {
-    background: '#f9f9f9',
+    background: '#b69c8b',
     padding: '20px',
     border: '1px solid #ddd',
     borderRadius: '8px',
