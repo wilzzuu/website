@@ -1,26 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css'; // Create this file to style the navbar if needed
+import { useAuth } from '../context/AuthContext';
+import '../styles.css';
+import LogoutButton from './LogoutButton';
+import LoginButton from './LoginButton';
 
 function Navbar() {
+    const { currentUser } = useAuth();
   return (
     <nav>
       <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-            <Link to="/portfolio">Portfolio</Link>
-        </li>
-        <li>
-          <Link to="/todo">TODO List</Link>
-        </li>
-        <li>
-          <Link to="/finance">Financial Tracker</Link>
-        </li>
-        <li>
-          <Link to="/weekplanner">Week Planner</Link>
-        </li>
+        <li id="homeLink"><Link to="/">Home</Link></li>
+        <li id="portfolioLink"><Link to="/portfolio">Portfolio</Link></li>
+        {currentUser ? (
+            <>
+                <li id="todoLink"><Link to="/todo">TODO List</Link></li>
+                <li id="financeLink"><Link to="/finance">Financial Tracker</Link></li>
+                <li id="weekplannerLink"><Link to="/weekplanner">Week Planner</Link></li>
+                <LogoutButton />
+            </>
+        ) : (
+            <LoginButton />
+        )}
       </ul>
     </nav>
   );
