@@ -18,6 +18,7 @@ import ProjectPage from './pages/ProjectPage';
 import TodoList from './pages/TodoList';
 import FinancialTracker from './pages/FinancialTracker';
 import WeekPlanner from './pages/WeekPlanner';
+import CV from './pages/CV';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -47,6 +48,12 @@ function App() {
                                     <AddProjectForm/>
                                 </PrivateRoute>
                             } 
+                        />
+                        <Route path="/CV" element={
+                            <PrivateRoute>
+                                <CV />
+                            </PrivateRoute>
+                            }
                         />
                         <Route
                             path="/todo"

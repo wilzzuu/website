@@ -14,6 +14,7 @@ function Navbar() {
         <li id="portfolioLink"><Link to="/portfolio">Portfolio</Link></li>
         {currentUser ? (
             <>
+                <li id="cvLink"><Link to="/CV">CV</Link></li>
                 <li id="todoLink"><Link to="/todo">TODO List</Link></li>
                 <li id="financeLink"><Link to="/finance">Financial Tracker</Link></li>
                 <li id="weekplannerLink"><Link to="/weekplanner">Week Planner</Link></li>
