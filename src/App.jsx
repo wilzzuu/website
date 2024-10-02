@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Login from './pages/Login'
 import Portfolio from './pages/Portfolio';
 import AddProjectForm from './pages/AddProjectForm';
+import EditProject from './components/EditProject';
 import ProjectPage from './pages/ProjectPage';
 import TodoList from './pages/TodoList';
 import FinancialTracker from './pages/FinancialTracker';
@@ -41,6 +42,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/portfolio" element={<Portfolio />} />
                         <Route path="/portfolio/:projectId" element={<ProjectPage />} />
+                        <Route path="/edit-project/:projectId" element={<EditProject />} />
                         <Route
                             path="/portfolio/addproject" 
                             element={

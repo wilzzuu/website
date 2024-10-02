@@ -18,14 +18,13 @@ const LoginButton = () => {
 // Optional inline styles for the button
 const styles = {
   logoutButton: {
-    padding: '6px 10px',
+    padding: '6px 15px',
     backgroundColor: '#8ce06e',
     color: '#fff',
     border: 'none',
     cursor: 'pointer',
     borderRadius: '5px',
     fontSize: '16px',
-    
   },
 };
 

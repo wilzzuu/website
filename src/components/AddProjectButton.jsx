@@ -9,7 +9,7 @@ const AddProjectButton = () => {
   }
 
   return (
-    <button id="addProjectButton" onClick={handleNavigation} style={styles.addProjectButton}>
+    <button onClick={handleNavigation} style={styles.addProjectButton}>
       Add Project
     </button>
   );
