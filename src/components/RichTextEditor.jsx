@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import DOMPurify from 'dompurify';
 
-const RichTextEditor = ({ value, onChange }) => {
+const RichTextEditor = ({ onSave }) => {
+  const [content, setContent] = useState('');
+
+  // Handle content change
+  const handleContentChange = (value) => {
+    setContent(value);
+  };
+
+  // Sanitize content before saving
+  const handleSave = () => {
+    const sanitizedContent = DOMPurify.sanitize(content);
+    onSave(sanitizedContent); // Call parent function to save the sanitized content
+  };
+
   return (
-    <ReactQuill
-      theme="snow"
-      value={value}
-      onChange={onChange}
-      modules={{
-        toolbar: [
-          [{ header: '1' }, { header: '2' }, { font: [] }],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          ['bold', 'italic', 'underline', 'strike'],
-          ['link', 'image'],
-          ['clean'],
-        ],
-      }}
-      formats={[
-        'header', 'font', 'list', 'bullet',
-        'bold', 'italic', 'underline', 'strike',
-        'link', 'image',
-      ]}
-    />
+    <div>
+      <ReactQuill theme="snow" value={content} onChange={handleContentChange} />
+      <button onClick={handleSave}>Save Content</button>
+    </div>
   );
 };
 

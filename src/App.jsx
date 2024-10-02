@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './PrivateRoute';
 import './index.css';
+import './styles.css'
 
 import AddTransactionForm from './components/AddTransactionForm';
 import TransactionList from './components/TransactionList';

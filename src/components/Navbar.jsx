@@ -8,7 +8,7 @@ import LoginButton from './LoginButton';
 function Navbar() {
   const { currentUser } = useAuth();
   return (
-    <nav>
+    <nav class="navigationBar">
       <ul>
         <li id="homeLink"><Link to="/">Home</Link></li>
         <li id="portfolioLink"><Link to="/portfolio">Portfolio</Link></li>

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import Carousel from '../components/Carousel';
+import DOMPurify from 'dompurify';
 
 const ProjectPage = () => {
   const { projectId } = useParams(); // Get the dynamic route parameter
@@ -21,7 +22,8 @@ const ProjectPage = () => {
         if (!querySnapshot.empty) {
             // Assuming only one document matches the route
             const projectData = querySnapshot.docs[0].data();
-            setProject(projectData);
+            const sanitizedContent = DOMPurify.sanitize(projectData.deepdive);
+            setProject({ ...projectData, deepdive: sanitizedContent});
           } else {
             setError('Project not found');
           }
