@@ -143,7 +143,6 @@ const styles = {
     featuredProjectsTitle:{
         textAlign: 'center',
         fontSize: '28px',
-        margin: 'auto',
         margin: '40px 0 20px',
     },
     featuredProjectsGrid: {
