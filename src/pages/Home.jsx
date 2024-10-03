@@ -10,15 +10,15 @@ function Home() {
     }
   return (
     <div>
-        <div class="hero-section" style={styles.container}>
+        <div className="hero-section" style={styles.container}>
             <div style={styles.welcomeContainer}>
                 <h1 style={styles.mainHeader}>Welcome to my personal website</h1>
                 <p style={styles.mainParagraph}>The purpose of this website is to share my projects, skills, and journey as a hobbyist developer.</p>
                 <div style={styles.portfolioButton}>
-                    <button onClick={() => handleNavigation()} class="cta-button">Explore My Work</button>
+                    <button onClick={() => handleNavigation()} className="cta-button">Explore My Work</button>
                 </div>
             </div>
-            <section id="about-section-id" class="about-section" style={styles.aboutMe}>
+            <section id="about-section-id" className="about-section" style={styles.aboutMe}>
                 <h2>About Me</h2>
                 <div>
                     <p>I'm a self-taught hobbyist developer with some experience spread across software, web and game development.</p>
@@ -26,9 +26,9 @@ function Home() {
                     <p>I am motivated to learn about programming and tech related topics and I am pursuing a career where I could apply my skills, while also aquiring new knowledge.</p>
                 </div>
             </section>
-            <section id="skills-section-id" class="skills-section" style={styles.skillsSection}>
+            <section id="skills-section-id" className="skills-section" style={styles.skillsSection}>
                 <h2>Tools, Resources & Technologies I Use</h2>
-                <ul class="skills-list" style={styles.skillsList}>
+                <ul className="skills-list" style={styles.skillsList}>
                     <li>● HTML</li>
                     <li>● CSS</li>
                     <li>● JavaScript</li>
@@ -47,22 +47,22 @@ function Home() {
                     <li style={styles.skillSectionLink}><a href="https://freecodecamp.org/learn">● freecodecamp.org</a></li>
                 </ul>
             </section>
-            <section id="featured-id" class="featured-projects">
+            <section id="featured-id" className="featured-projects">
                 <h2 id="featuredTitle" style={styles.featuredProjectsTitle}>Featured Projects</h2>
                 <div style={styles.featuredProjectsGrid}>
-                    <div class="featuredProjectCard" style={styles.featuredProjectCard}>
+                    <div className="featuredProjectCard" style={styles.featuredProjectCard}>
                         <img style={styles.featuredProjectImage} src="https://wilzzu.xyz/assets/weather_app_card_image.png" alt="Project 1"></img>
                         <h3>Weather App</h3>
                         <p>Weather app built in Python using Custom Tkinter. API calls are used to get weather based on geolocation.</p>
                         <a style={styles.featuredProjectLink} href="/portfolio/weather-app">Read More</a>
                     </div>
-                    <div class="featuredProjectCard" style={styles.featuredProjectCard}>
+                    <div className="featuredProjectCard" style={styles.featuredProjectCard}>
                         <img style={styles.featuredProjectImage} src="https://wilzzu.xyz/assets/card_image_placeholder.png" alt="Project 2"></img>
                         <h3>Personal Website</h3>
                         <p>A short description of the project.</p>
                         <a style={styles.featuredProjectLink} href="/portfolio/personal-website">Read More</a>
                     </div>
-                    <div class="featuredProjectCard" style={styles.featuredProjectCard}>
+                    <div className="featuredProjectCard" style={styles.featuredProjectCard}>
                         <img style={styles.featuredProjectImage} src="https://wilzzu.xyz/assets/card_image_placeholder.png" alt="Project 3"></img>
                         <h3>Project 3</h3>
                         <p>A short description of the project.</p>
@@ -75,7 +75,7 @@ function Home() {
             <div style={styles.footerItem}>
                 <a href="https://github.com/wilzzuu" target="_blank">GitHub</a>
             </div>
-            <div class="footer-copyright" style={styles.footerCopyright}>
+            <div className="footer-copyright" style={styles.footerCopyright}>
                 <p>© 2024 wilzzu.xyz. All Rights Reserved.</p>
             </div>
         </footer>

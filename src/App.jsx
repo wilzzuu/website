@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './PrivateRoute';
 import './index.css';
-import './styles.css'
 
 import AddTransactionForm from './components/AddTransactionForm';
 import TransactionList from './components/TransactionList';
@@ -22,6 +22,7 @@ import FinancialTracker from './pages/FinancialTracker';
 import WeekPlanner from './pages/WeekPlanner';
 import CV from './pages/CV';
 
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
@@ -33,10 +34,11 @@ root.render(
 
 function App() {
   return (
-    <AuthProvider>
-        <Router>
-            <div>
-                <Navbar />
+    <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+            <Router>
+                <div>
+                    <Navbar />
                     <Routes>
                         <Route path="/" element={<Home />} />
                         {/*<Route path="/register" element={<Register />} />*/}
@@ -85,9 +87,10 @@ function App() {
                             }
                         />
                     </Routes>
-            </div>
-        </Router>
-    </AuthProvider>
+                </div>
+            </Router>
+        </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

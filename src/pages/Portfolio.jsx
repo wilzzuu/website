@@ -1,82 +1,83 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase/firebase';
-import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc, limit } from 'firebase/firestore';
 import { useQuery } from 'react-query';
-import { useAuth } from '../context/AuthContext';
 import AddProjectButton from '../components/AddProjectButton';
+import { useAuth } from '../context/AuthContext';
+
+const fetchProjects = async (user) => {
+    const projectRef = collection(db, 'projects');
+
+    let q;
+    if (user) {
+        q = query(projectRef, limit(10));
+    } else {
+        q = query(projectRef, where('isPublished', '==', true), limit(10));
+    }
+    
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+};
 
 const Portfolio = () => {
-    const [error, setError] = useState(null); // Error state
     const { currentUser } = useAuth();
-
-    const fetchProjects = async () => {
-        const projectRef = collection(db, 'projects');
-
-        let q;
-        if (currentUser) {
-            q = query(projectRef);
-        } else {
-            q = query(projectRef, where('isPublished', '==', true));
+    const { data: projects, isLoading, error } = useQuery(
+        ['projects', currentUser],
+        () => fetchProjects(currentUser),
+        {
+            enabled: !!currentUser || currentUser === null,
+            cacheTime: 1000 * 60 * 5,
+            staleTime: 1000 * 60 * 2,
         }
+    );
 
-        const querySnapshot = await getDocs(q);
-        setError(error)
-        return querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-    };
+    if (isLoading) return <div>Loading projects...</div>;
 
-    const ProjectList = () => {
-        const { data: projects, isLoading } = useQuery('projects', fetchProjects, {
-            staleTime: 300000,
-        });
+    if (error) return <p>Error: {error.message || JSON.stringify(error)}</p>;
 
-        if (isLoading) return <div>Loading projects...</div>;
 
-        if (error) {
-            return <div>{error}</div>;
-        }
-
-        return (
-            <div>
-                <div style={styles.container}>
-                    <h1 style={styles.header}>My Projects</h1>
-                    {currentUser ? (
-                        <div style={styles.button}>
-                            <AddProjectButton  />
-                        </div>
-                    ) : (
-                        <></>
-                    )}
-                    <div style={styles.grid}>
-                        {projects.map((project) => (
-                        <div key={project.id} style={styles.card}>
-                            <Link to={`/portfolio/${project.route}`} style={styles.link}>
-                            <img src={project.cardImage} alt={project.title} style={styles.image} />
-                            <h2>{project.title}</h2>
-                            <p>{project.description}</p>
-                            </Link>
-                            <div style={styles.buttons}>
-                                {currentUser ? (
-                                    <>
-                                        <button style={styles.isPublishedButton} onClick={() => togglePublishStatus(project.id, project.isPublished)}>
-                                            { project.isPublished ? 'Hide' : 'Publish' }
-                                        </button>
-                                        <button style={styles.editProjectButton} onClick={() => handleEditProject(project.id)}>Edit</button>
-                                    </>
-                                ) : (
-                                    <></>
-                                )}
-                            </div>
-                        </div>
-                        ))}
+    return (
+        <div>
+            <div style={styles.container}>
+                <h1 style={styles.header}>My Projects</h1>
+                {currentUser ? (
+                    <div style={styles.button}>
+                        <AddProjectButton  />
                     </div>
+                ) : (
+                    <></>
+                )}
+                <div style={styles.grid}>
+                    {projects.length > 0 ? (
+                        projects.map((project) => (
+                            <div key={project.id} style={styles.card}>
+                                <Link to={`/portfolio/${project.route}`} style={styles.link}>
+                                <img src={project.cardImage} alt={project.title} style={styles.image} />
+                                <h2>{project.title}</h2>
+                                <p>{project.description}</p>
+                                </Link>
+                                <div style={styles.buttons}>
+                                    {currentUser ? (
+                                        <>
+                                            <button style={styles.isPublishedButton} onClick={() => togglePublishStatus(project.id, project.isPublished)}>
+                                                { project.isPublished ? 'Hide' : 'Publish' }
+                                            </button>
+                                            <button style={styles.editProjectButton} onClick={() => handleEditProject(project.id)}>Edit</button>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No projects available</p>
+                    )}
                 </div>
             </div>
-        );
-    };
+        </div>
+    );
 };
 
 const togglePublishStatus = async (projectId, currentStatus) => {
