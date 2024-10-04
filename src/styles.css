@@ -10,6 +10,7 @@
     top: 0;
     background-color: #333;
     padding: 10px;
+    z-index: 100000;
 }
 
 ul {
@@ -47,4 +48,39 @@ a:hover {
     position: fixed;
     top: 6px;
     right: 120px;
+}
+
+.slick-prev, .slick-next {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slick-slider .slick-dots li button {
+    color: rgba(255, 255, 255, 0.5); /* Default dot color */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Optional: border around dots */
+    border-radius: 50%; /* Make the dots circular */
+    transition: background 0.3s ease; /* Smooth transition effect */
+}
+
+.slick-slider .slick-dots li.slick-active button {
+    background: #ffffff; /* Active dot color */
+    border: 2px solid #ffffff; /* Optional: border around active dot */
+}
+
+.slick-slider .slick-dots li button:hover {
+    background: rgba(255, 255, 255, 0.8); /* Dot color on hover */
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.slick-slider .slick-dots {
+bottom: -30px; /* Position the dots slightly lower */
 }

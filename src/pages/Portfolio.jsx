@@ -1,46 +1,75 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs, updateDoc, doc, limit } from 'firebase/firestore';
-import { useQuery } from 'react-query';
-import AddProjectButton from '../components/AddProjectButton';
 import { useAuth } from '../context/AuthContext';
-
-const fetchProjects = async (user) => {
-    const projectRef = collection(db, 'projects');
-
-    let q;
-    if (user) {
-        q = query(projectRef, limit(10));
-    } else {
-        q = query(projectRef, where('isPublished', '==', true), limit(10));
-    }
-    
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-};
+import AddProjectButton from '../components/AddProjectButton';
 
 const Portfolio = () => {
     const { currentUser } = useAuth();
-    const { data: projects, isLoading, error } = useQuery(
-        ['projects', currentUser],
-        () => fetchProjects(currentUser),
-        {
-            enabled: !!currentUser || currentUser === null,
-            cacheTime: 1000 * 60 * 5,
-            staleTime: 1000 * 60 * 2,
-        }
-    );
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
-    if (isLoading) return <div>Loading projects...</div>;
+    useEffect(() => {
+    const fetchProjects = async () => {
+        try {
+            const cacheKey = `portfolio`;
+            const cachedData = localStorage.getItem(cacheKey);
+
+            if (cachedData) {
+                const parsedData = JSON.parse(cachedData);
+                setProjects(parsedData.projects);
+                console.log('Loaded projects from cache.');
+            } else {
+                const projectRef = collection(db, 'projects');
+    
+                let q;
+                if (currentUser) {
+                    q = query(projectRef, limit(10));
+                } else {
+                    q = query(projectRef, where('isPublished', '==', true), limit(10));
+                }
+                
+                const querySnapshot = await getDocs(q);
+                const projectList = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                setProjects(projectList);
+            }
+        } catch (error) {
+            console.error('Error fetching portfolio: ', error);
+            setError('Failed to fetch portfolio');
+        } finally {
+            setLoading(false);
+        };
+    }
+    fetchProjects();
+    }, [projects]);
+
+    const togglePublishStatus = async (projectId, currentStatus) => {
+        const projectDoc = doc(db, 'projects', projectId);
+        await updateDoc(projectDoc, { isPublished: !currentStatus });
+        
+        setProjects((prevProjects) =>
+            prevProjects.map((project) =>
+              project.id === projectId ? { ...project, isPublished: !currentStatus } : project
+            )
+        );
+    };
+      
+    const handleEditProject = (projectId) => {
+    // Redirect to edit form for the given project
+    window.location.href = `/edit-project/${projectId}`;
+    };
+
+    if (loading) return <div>Loading projects...</div>;
 
     if (error) return <p>Error: {error.message || JSON.stringify(error)}</p>;
-
 
     return (
         <div>
             <div style={styles.container}>
                 <h1 style={styles.header}>My Projects</h1>
+                <p style={styles.header2}>Click on a project for details.</p>
                 {currentUser ? (
                     <div style={styles.button}>
                         <AddProjectButton  />
@@ -80,28 +109,10 @@ const Portfolio = () => {
     );
 };
 
-const togglePublishStatus = async (projectId, currentStatus) => {
-    const projectDoc = doc(db, 'projects', projectId);
-    await updateDoc(projectDoc, {
-      isPublished: !currentStatus, // Toggle the current published status
-    });
-
-    setProjects((prevProjects) =>
-        prevProjects.map((project) =>
-          project.id === projectId ? { ...project, isPublished: !currentStatus } : project
-        )
-    );
-  };
-  
-const handleEditProject = (projectId) => {
-// Redirect to edit form for the given project
-window.location.href = `/edit-project/${projectId}`;
-};
-
 const styles = {
   container: {
     padding: '20px',
-    maxWidth: '1200px',
+    maxWidth: '1400px',
     margin: '0 auto',
   },
   button: {
@@ -112,6 +123,11 @@ const styles = {
     textAlign: 'center',
     fontSize: '36px',
     margin: '10px 0 20px',
+  },
+  header2: {
+    textAlign: 'center',
+    fontSize: '20px',
+    margin: '5px 0 20px',
   },
   grid: {
     display: 'grid',
@@ -124,7 +140,7 @@ const styles = {
     border: '1px solid #ddd',
     borderRadius: '8px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    maxWidth: '300',
+    maxWidth: '300px',
     height: '400px',
     position: 'relative',
   },
@@ -133,7 +149,7 @@ const styles = {
     color: 'inherit',
   },
   image: {
-    width: '100%',
+    width: '300px',
     height: '150px',
     objectFit: 'cover',
   },

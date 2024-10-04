@@ -59,13 +59,13 @@ function Home() {
                     <div className="featuredProjectCard" style={styles.featuredProjectCard}>
                         <img style={styles.featuredProjectImage} src="https://wilzzu.xyz/assets/card_image_placeholder.png" alt="Project 2"></img>
                         <h3>Personal Website</h3>
-                        <p>A short description of the project.</p>
+                        <p>Wesbite built with Vite, deployed on cPanel with a database on Firebase.</p>
                         <a style={styles.featuredProjectLink} href="/portfolio/personal-website">Read More</a>
                     </div>
                     <div className="featuredProjectCard" style={styles.featuredProjectCard}>
                         <img style={styles.featuredProjectImage} src="https://wilzzu.xyz/assets/card_image_placeholder.png" alt="Project 3"></img>
-                        <h3>Project 3</h3>
-                        <p>A short description of the project.</p>
+                        <h3>Featured Project 3</h3>
+                        <p>Placeholder description</p>
                         <a style={styles.featuredProjectLink} href="/portfolio/">Read More</a>
                     </div>
                 </div>
