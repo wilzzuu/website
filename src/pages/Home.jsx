@@ -56,7 +56,7 @@ function Home() {
                         <p>Weather app built in Python using Custom Tkinter. API calls are used to get weather based on geolocation.</p>
                         <a style={styles.featuredProjectLink} href="/portfolio/weather-app">Read More</a>
                     </div>
-                    <div className="featuredProjectCard" style={styles.featuredProjectCard}>
+                    {/*<div className="featuredProjectCard" style={styles.featuredProjectCard}>
                         <img style={styles.featuredProjectImage} src="https://wilzzu.xyz/assets/card_image_placeholder.png" alt="Project 2"></img>
                         <h3>Personal Website</h3>
                         <p>Wesbite built with Vite, deployed on cPanel with a database on Firebase.</p>
@@ -67,7 +67,7 @@ function Home() {
                         <h3>Featured Project 3</h3>
                         <p>Placeholder description</p>
                         <a style={styles.featuredProjectLink} href="/portfolio/">Read More</a>
-                    </div>
+                    </div>*/}
                 </div>
             </section>
         </div>
