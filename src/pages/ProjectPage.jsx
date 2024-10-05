@@ -30,8 +30,12 @@ const ProjectPage = () => {
         ['project', projectId],
         () => fetchProject(projectId),
         {
+            enabled: !!currentUser || currentUser === null,
             staleTime : 1000 * 60 * 120,
             cacheTime: 1000 * 60 * 60,
+            refetchOnWindowFocus: true,
+            refetchOnReconnect: false,
+            keepPreviousData: true,
         }
     );
     useEffect(() => {

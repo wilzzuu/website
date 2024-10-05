@@ -41,6 +41,9 @@ const TransactionList = () => {
             enabled: !!currentUser || currentUser === null,
             cacheTime: 1000 * 60 * 120,
             staleTime: 1000 * 60 * 60,
+            refetchOnWindowFocus: true,
+            refetchOnReconnect: false,
+            keepPreviousData: true,
         }
     );
 
