@@ -30,8 +30,8 @@ const ProjectPage = () => {
         ['project', projectId],
         () => fetchProject(projectId),
         {
-            staleTime : 1000 * 60 * 5,
-            cacheTime: 1000 * 60 * 10,
+            staleTime : 1000 * 60 * 120,
+            cacheTime: 1000 * 60 * 60,
         }
     );
     useEffect(() => {
