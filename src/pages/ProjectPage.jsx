@@ -31,8 +31,8 @@ const ProjectPage = () => {
         () => fetchProject(projectId),
         {
             enabled: !!currentUser || currentUser === null,
-            staleTime : 1000 * 60 * 120,
-            cacheTime: 1000 * 60 * 60,
+            cacheTime: 72000000, // 2h cache time
+            staleTime: 36000000, // 1h stale time
             refetchOnWindowFocus: true,
             refetchOnReconnect: false,
             keepPreviousData: true,
