@@ -37,20 +37,9 @@ const Portfolio = () => {
         }
     );
 
-    useEffect(() => {
-        fetchProjects();
-    }, [projects]);
-
-
     const togglePublishStatus = async (projectId, currentStatus) => {
         const projectDoc = doc(db, 'projects', projectId);
         await updateDoc(projectDoc, { isPublished: !currentStatus });
-        
-        setProjects((prevProjects) =>
-            prevProjects.map((project) =>
-              project.id === projectId ? { ...project, isPublished: !currentStatus } : project
-            )
-        );
     };
       
     const handleEditProject = (projectId) => {

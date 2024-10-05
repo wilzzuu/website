@@ -11,15 +11,10 @@ const fetchTransactions = async () => {
             return;
         }
 
-        if (auth.currentUser) {
-            const q = query(
-                collection(db, 'transactions'),
-                where('userId', '==', auth.currentUser.uid)
-            );
-        }
+        const q = query(collection(db, 'transactions'), where('userId', '==', auth.currentUser.uid));
+        const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
-            const querySnapshot = await getDocs(q);
             return querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id, }));
         } else {
             throw new Error('Transactions not found.');
@@ -46,10 +41,6 @@ const TransactionList = () => {
             keepPreviousData: true,
         }
     );
-
-    useEffect(() => {
-        fetchTransactions();
-    }, [transactions]);
 
     if (isLoading) return <div>Loading transactions...</div>;
     if (error) { return <div>Error: {error}</div>; }

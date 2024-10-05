@@ -38,9 +38,6 @@ const ProjectPage = () => {
             keepPreviousData: true,
         }
     );
-    useEffect(() => {
-        fetchProject();
-    }, [project, projectId]);
 
     const handleEditProject = (projectId) => {
         // Redirect to edit form for the given project
