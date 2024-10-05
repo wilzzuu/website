@@ -1,72 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useQuery } from 'react-query';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db, auth } from '../firebase/firebase';
 
-const TransactionList = () => {
-  const [transactions, setTransactions] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        // Ensure the user is logged in before querying
+const fetchTransactions = async () => {
+    try {
         if (!auth.currentUser) {
-          console.error('No user is currently logged in.');
-          setError('User is not authenticated.');
-          return;
+            console.error('No user is currently logged in.');
+            setError('User is not authenticated.');
+            return;
         }
 
-        // Create a query to get the user's transactions based on their UID
-        const q = query(
-          collection(db, 'transactions'),
-          where('userId', '==', auth.currentUser.uid)
-        );
-
-        // Execute the query and fetch documents
-        const querySnapshot = await getDocs(q);
-        
-        // Log the results for debugging
-        if (querySnapshot.empty) {
-          console.warn('No transactions found for this user.');
+        if (auth.currentUser) {
+            const q = query(
+                collection(db, 'transactions'),
+                where('userId', '==', auth.currentUser.uid)
+            );
         }
 
-        const fetchedTransactions = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
+        if (!querySnapshot.empty) {
+            const querySnapshot = await getDocs(q);
+            return querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id, }));
+        } else {
+            throw new Error('Transactions not found.');
+        }
 
-        setTransactions(fetchedTransactions);
-      } catch (err) {
-        console.error('Error fetching transactions:', err);
-        setError(err.message);
-      }
+    } catch (error) {
+        console.error('Error fetching transatcions: ', error);
+        setError(error.message);
     };
+};
 
-    // Call the function to fetch transactions
-    fetchTransactions();
-  }, []);
+const TransactionList = () => {
+    const { currentUser } = useAuth();
 
-  // Display any errors encountered during the fetch
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    const { data: transactions, isLoading, error } = useQuery(
+        ['transatcions', currentUser],
+        () => fetchTransactions(),
+        {
+            enabled: !!currentUser || currentUser === null,
+            cacheTime: 1000 * 60 * 5,
+            staleTime: 1000 * 60 * 10,
+        }
+    );
 
-  return (
-    <div>
-      <h2>Your Transactions</h2>
-      <ul>
-        {transactions.length > 0 ? (
-          transactions.map((txn) => (
-            <li key={txn.id}>
-              {txn.type === 'income' ? '+' : '-'}${txn.amount} - {txn.category}
-            </li>
-          ))
-        ) : (
-          <p>No transactions found.</p>
-        )}
-      </ul>
-    </div>
-  );
+    useEffect(() => {
+        fetchTransactions();
+    }, [transactions]);
+
+    if (isLoading) return <div>Loading transactions...</div>;
+    if (error) { return <div>Error: {error}</div>; }
+
+    return (
+        <div>
+        <h2>Your Transactions</h2>
+        <ul>
+            {transactions.length > 0 ? (
+            transactions.map((txn) => (
+                <li key={txn.id}>
+                {txn.type === 'income' ? '+' : '-'}${txn.amount} - {txn.category}
+                </li>
+            ))
+            ) : (
+            <p>No transactions found.</p>
+            )}
+        </ul>
+        </div>
+    );
 };
 
 export default TransactionList;

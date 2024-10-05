@@ -1,49 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs, updateDoc, doc, limit } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import AddProjectButton from '../components/AddProjectButton';
 
+const fetchProjects = async (user) => {
+    const projectRef = collection(db, 'projects');
+
+    let q;
+    if (user) {
+        q = query(projectRef, limit(10));
+    } else {
+        q = query(projectRef, where('isPublished', '==', true), limit(10));
+    }
+
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+};
+
+
 const Portfolio = () => {
     const { currentUser } = useAuth();
-    const [projects, setProjects] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+
+    const { data: projects, isLoading, error } = useQuery(
+        ['projects', currentUser],
+        () => fetchProjects(currentUser),
+        {
+            enabled: !!currentUser || currentUser === null,
+            cacheTime: 1000 * 60 * 5,
+            staleTime: 1000 * 60 * 10,
+        }
+    );
 
     useEffect(() => {
-    const fetchProjects = async () => {
-        try {
-            const cacheKey = `portfolio`;
-            const cachedData = localStorage.getItem(cacheKey);
-
-            if (cachedData) {
-                const parsedData = JSON.parse(cachedData);
-                setProjects(parsedData.projects);
-                console.log('Loaded projects from cache.');
-            } else {
-                const projectRef = collection(db, 'projects');
-    
-                let q;
-                if (currentUser) {
-                    q = query(projectRef, limit(10));
-                } else {
-                    q = query(projectRef, where('isPublished', '==', true), limit(10));
-                }
-                
-                const querySnapshot = await getDocs(q);
-                const projectList = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-                setProjects(projectList);
-            }
-        } catch (error) {
-            console.error('Error fetching portfolio: ', error);
-            setError('Failed to fetch portfolio');
-        } finally {
-            setLoading(false);
-        };
-    }
-    fetchProjects();
+        fetchProjects();
     }, [projects]);
+
 
     const togglePublishStatus = async (projectId, currentStatus) => {
         const projectDoc = doc(db, 'projects', projectId);
@@ -61,7 +55,7 @@ const Portfolio = () => {
     window.location.href = `/edit-project/${projectId}`;
     };
 
-    if (loading) return <div>Loading projects...</div>;
+    if (isLoading) return <div>Loading projects...</div>;
 
     if (error) return <p>Error: {error.message || JSON.stringify(error)}</p>;
 

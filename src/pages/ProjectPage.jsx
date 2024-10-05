@@ -1,66 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import Carousel from '../components/Carousel';
 import DOMPurify from 'dompurify';
 
-const ProjectDetail = () => {
+const fetchProject = async(projectId) => {
+    const projectRef = collection(db, 'projects');
+    const q = query(projectRef, where('route', '==', projectId));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+        const doc = querySnapshot.docs[0];
+        const projectData = doc.data();
+        const sanitizedContent = DOMPurify.sanitize(projectData.deepdive);
+        return { ...projectData, deepdive: sanitizedContent, documentId: doc.id };
+    } else {
+        throw new Error('Project not found');
+    }
+};
+
+const ProjectPage = () => {
     const { currentUser } = useAuth();
     const { projectId } = useParams();
-    const [project, setProject] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-    const [documentId, setDocumentId] = useState('');
 
-  // Fetch the specific project from Firestore using the dynamic route parameter
-  useEffect(() => {
-    const fetchProject = async () => {
-        try {
-            const cacheKey = `project_${projectId}`;
-            const cachedData = localStorage.getItem(cacheKey);
+    const { data: project, isLoading, error } = useQuery(
+        ['project', projectId],
+        () => fetchProject(projectId),
+        {
+            staleTime : 1000 * 60 * 5,
+            cacheTime: 1000 * 60 * 10,
+        }
+    );
+    useEffect(() => {
+        fetchProject();
+    }, [project, projectId]);
 
-            if (cachedData) {
-                const parsedData = JSON.parse(cachedData);
-                setProject(parsedData.project);
-                setDocumentId(parsedData.documentId);
-                console.log('Loaded project data from cache.');
-            } else {
-                const projectRef = collection(db, 'projects'); // Reference to the specific project document
-                const q = query(projectRef, where('route', '==', projectId)); // Get the document snapshot
-                const querySnapshot = await getDocs(q);
-        
-                if (!querySnapshot.empty) {
-                    // Assuming only one document matches the route
-                    const doc = querySnapshot.docs[0];
-                    const projectData = doc.data();
-                    const sanitizedContent = DOMPurify.sanitize(projectData.deepdive);
-                    setProject({ ...projectData, deepdive: sanitizedContent});
-                    setDocumentId(doc.id);
-                } else {
-                    setError('Project not found');
-                }
-            } 
-        } catch (err) {
-            console.error('Error fetching project: ', err);
-            setError('Failed to fetch project');
-        } finally {
-            setLoading(false);
-        };
-    }
-    fetchProject();
-  }, [project, projectId]);
+    const handleEditProject = (projectId) => {
+        // Redirect to edit form for the given project
+        window.location.href = `/edit-project/${projectId}`;
+    };
 
-  if (loading) {return <div>Loading project...</div>;}
+  if (isLoading) {return <div>Loading project...</div>;}
   if (error) {return <div>{error}</div>;}
   
   return (
     <div>
         {currentUser ? (
-            <Link to={`/edit-project/${documentId}`}>
             <button style={styles.editButton} onClick={() => handleEditProject(documentId)}>Edit Project</button>
-            </Link>
         ):(
             <></>
         )}
@@ -75,11 +64,6 @@ const ProjectDetail = () => {
     </div>
   );
 };
-
-const handleEditProject = (projectId) => {
-    // Redirect to edit form for the given project
-    window.location.href = `/edit-project/${projectId}`;
-    };
 
 const styles = {
   container: {
@@ -115,4 +99,4 @@ const styles = {
   },
 };
 
-export default ProjectDetail;
+export default ProjectPage;
