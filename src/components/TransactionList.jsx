@@ -39,8 +39,8 @@ const TransactionList = () => {
         () => fetchTransactions(),
         {
             enabled: !!currentUser || currentUser === null,
-            cacheTime: 1000 * 60 * 5,
-            staleTime: 1000 * 60 * 10,
+            cacheTime: 1000 * 60 * 15,
+            staleTime: 1000 * 60 * 15,
         }
     );
 
