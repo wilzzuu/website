@@ -10,6 +10,7 @@ import Notification from '../components/Notification';
 const Portfolio = () => {
     const { currentUser } = useAuth();
     const [notification, setNotification] = useState(null);
+    const [isPublishedState, setIsPublishedState] = useState();
     const queryClient = useQueryClient();
     const prevProjectsRef = useRef([]);
 
@@ -70,11 +71,12 @@ const Portfolio = () => {
           // Cleanup listener on component unmount
           return () => unsubscribe();
         }
-    }, [currentUser, queryClient]);
+    }, [isPublishedState, currentUser, queryClient]);
 
     const togglePublishStatus = async (projectId, currentStatus) => {
         const projectDoc = doc(db, 'projects', projectId);
         await updateDoc(projectDoc, { isPublished: !currentStatus });
+        setIsPublishedState(!currentStatus);
     };
       
     const handleEditProject = (projectId) => {
