@@ -2,6 +2,8 @@ name: Deploy to cPanel
 
 on:
   push:
+    paths:
+      - dist/**
     branches:
       - main
   workflow_dispatch:
