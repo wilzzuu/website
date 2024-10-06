@@ -18,6 +18,7 @@ import AddProjectForm from './pages/AddProjectForm';
 import EditProject from './components/EditProject';
 import ProjectPage from './pages/ProjectPage';
 import TodoList from './pages/TodoList';
+import Pomodoro from './pages/Pomodoro';
 import FinancialTracker from './pages/FinancialTracker';
 import WeekPlanner from './pages/WeekPlanner';
 import CV from './pages/CV';
@@ -67,6 +68,14 @@ function App() {
                             element={
                                 <PrivateRoute>
                                     <TodoList />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/pomodoro"
+                            element={
+                                <PrivateRoute>
+                                    <Pomodoro />
                                 </PrivateRoute>
                             }
                         />

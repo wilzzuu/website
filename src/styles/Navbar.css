@@ -1,0 +1,45 @@
+.navigationBar {
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    padding: 10px;
+    z-index: 100000;
+}
+
+.navigationBar ul {
+    list-style-type: none;
+    display: flex;
+    gap: 14px;
+}
+
+.navigationBar li {
+    display: inline;
+}
+
+.navigationBar li a {
+    color: white;
+    text-decoration: none;
+}
+
+.navigationBar a:hover {
+    text-decoration: underline;
+    color : rgb(255, 0, 0);
+}
+
+#logoutButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#loginButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#loggedInText {
+    position: fixed;
+    top: 6px;
+    right: 120px;
+}

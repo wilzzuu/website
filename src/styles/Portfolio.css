@@ -1,0 +1,82 @@
+.portfolio-container {
+    padding: 20px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.portfolio-header {
+    text-align: center;
+    font-size: 36px;
+    margin: 10px 0 20px;
+}
+
+.portfolio-header2 {
+    text-align: center;
+    font-size: 20px;
+    margin: 5px 0 20px;
+}
+
+.add-project-button {
+    text-align: center;
+    padding: 20px;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 100%;
+    margin: auto;
+}
+
+.portfolio-project-card {
+    background: #b69c8b;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    height: 400px;
+    position: relative;
+    text-align: center;
+}
+
+.portfolio-project-link {
+    text-decoration: none;
+    color: inherit;
+    width: 300px;
+    height: 380px;
+}
+
+.portfolio-project-title {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.portfolio-project-description {
+    font-size: 16px;
+}
+
+.portfolio-project-image {
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.portfolio-project-card-buttons {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+}
+
+.portfolio-project-card-buttons #is-published-button {
+    text-align: left;
+    position: relative;
+    margin: auto;
+}
+
+.portfolio-project-card-buttons #edit-project-button {
+    text-align: left;
+    position: relative;
+    margin: 10px;
+}

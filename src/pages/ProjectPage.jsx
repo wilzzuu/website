@@ -6,6 +6,8 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import Carousel from '../components/Carousel';
 import DOMPurify from 'dompurify';
+import '../styles/Global.css';
+import '../styles/ProjectPage.css';
 
 const fetchProject = async(user, projectId) => {
     const projectRef = collection(db, 'projects');
@@ -56,17 +58,17 @@ const ProjectPage = () => {
   return (
     <div>
         {currentUser ? (
-            <button style={styles.editButton} onClick={() => handleEditProject(documentId)}>Edit Project</button>
+            <button className='edit-project-button' onClick={() => handleEditProject(documentId)}>Edit Project</button>
         ):(
             <></>
         )}
         
-        <div style={styles.container}>
-        <h1>{project.title}</h1>
-        <p style={styles.desc}>{project.description}</p>
-        {project.images ? <Carousel images={ project.images } style={styles.image}/> : <p>No images to display</p>}
-        <h1 style={styles.deepdiveTitle}>Project Deep Dive</h1>
-        <div dangerouslySetInnerHTML={{ __html: project.deepdive }} style={styles.deepdive}/>
+        <div className='project-page-container'>
+        <h1 className='project-title'>{project.title}</h1>
+        <p className='project-description'>{project.description}</p>
+        {project.images ? <Carousel images={ project.images } className='project-image'/> : <p>No images to display</p>}
+        <h1 className='deep-dive-title'>Project Deep Dive</h1>
+        <div dangerouslySetInnerHTML={{ __html: project.deepdive }} className='deep-dive'/>
         </div>
     </div>
   );

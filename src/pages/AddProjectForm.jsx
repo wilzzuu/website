@@ -4,6 +4,7 @@ import { db } from '../firebase/firebase';
 import { useAuth } from '../context/AuthContext';
 import ImageUploadForm from './ImageUploadForm';
 import RichTextEditor from '../components/RichTextEditor';
+import '../styles/Global.css';
 
 const AddProjectForm = () => {
   const [title, setTitle] = useState('');

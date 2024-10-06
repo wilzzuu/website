@@ -6,6 +6,8 @@ import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } 
 import { useAuth } from '../context/AuthContext';
 import AddProjectButton from '../components/AddProjectButton';
 import Notification from '../components/Notification';
+import '../styles/Portfolio.css';
+import '../styles/Global.css';
 
 const Portfolio = () => {
     const { currentUser } = useAuth();
@@ -90,32 +92,32 @@ const Portfolio = () => {
     return (
         <div>
             {notification && <Notification message={notification}/>}
-            <div style={styles.container}>
-                <h1 style={styles.header}>My Projects</h1>
-                <p style={styles.header2}>Click on a project for details.</p>
+            <div className='portfolio-container'>
+                <h1 className='portfolio-header'>My Projects</h1>
+                <p className='portfolio-header2'>Click on a project for details.</p>
                 {currentUser ? (
-                    <div style={styles.button}>
+                    <div className='add-project-button'>
                         <AddProjectButton  />
                     </div>
                 ) : (
                     <></>
                 )}
-                <div style={styles.grid}>
+                <div className='portfolio-grid'>
                     {projects.length > 0 ? (
                         projects.map((project) => (
-                            <div key={project.id} style={styles.card}>
-                                <Link to={`/portfolio/${project.route}`} style={styles.link}>
-                                <img src={project.cardImage} alt={project.title} style={styles.image} />
-                                <h2>{project.title}</h2>
-                                <p>{project.description}</p>
-                                </Link>
-                                <div style={styles.buttons}>
+                            <div className='portfolio-project-card' key={project.id}>
+                                    <Link className='portfolio-project-link' to={`/portfolio/${project.route}`}>
+                                    <img className='portfolio-project-image' src={project.cardImage} alt={project.title}/>
+                                    <h2 className='portfolio-project-title'>{project.title}</h2>
+                                    <p className='portfolio-project-description'>{project.description}</p>
+                                    </Link>
+                                <div className='portfolio-project-card-buttons'>
                                     {currentUser ? (
                                         <>
-                                            <button style={styles.isPublishedButton} onClick={() => togglePublishStatus(project.id, project.isPublished)}>
+                                            <button id='is-published-button' onClick={() => togglePublishStatus(project.id, project.isPublished)}>
                                                 { project.isPublished ? 'Hide' : 'Publish' }
                                             </button>
-                                            <button style={styles.editProjectButton} onClick={() => handleEditProject(project.id)}>Edit</button>
+                                            <button id='edit-project-button' onClick={() => handleEditProject(project.id)}>Edit</button>
                                         </>
                                     ) : (
                                         <></>
@@ -130,67 +132,6 @@ const Portfolio = () => {
             </div>
         </div>
     );
-};
-
-const styles = {
-  container: {
-    padding: '20px',
-    maxWidth: '1400px',
-    margin: '0 auto',
-  },
-  button: {
-    textAlign: 'center',
-    padding: '20px',
-  },
-  header: {
-    textAlign: 'center',
-    fontSize: '36px',
-    margin: '10px 0 20px',
-  },
-  header2: {
-    textAlign: 'center',
-    fontSize: '20px',
-    margin: '5px 0 20px',
-  },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-    gap: '20px',
-  },
-  card: {
-    background: '#b69c8b',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    maxWidth: '300px',
-    height: '400px',
-    position: 'relative',
-  },
-  link: {
-    textDecoration: 'none',
-    color: 'inherit',
-  },
-  image: {
-    width: '300px',
-    height: '150px',
-    objectFit: 'cover',
-  },
-  buttons: {
-    position: 'absolute',
-    bottom: '5px',
-    left: '10px',
-  },
-  isPublishedButton: {
-    textAlign: 'left',
-    margin: 'auto',
-    bottom: '10px'
-  },
-  editProjectButton: {
-    textAlign: 'left',
-    margin: '10px',
-    bottom: '10px'
-  }
 };
 
 export default Portfolio;

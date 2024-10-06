@@ -1,0 +1,79 @@
+.project-page-container {
+    padding: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.project-title {
+    font-size: 36px;
+    margin-top: 30px;
+}
+
+.project-description {
+    margin-top: -10px;
+    margin-bottom: 40px;
+    font-size: 20px;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.deep-dive-title {
+    margin-top: 80px;
+    font-size: 36px;
+}
+
+.deep-dive {
+    text-align: left;
+    font-size: 19px;
+    margin-bottom: 100px;
+}
+
+.edit-project-button {
+    position: fixed;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.carousel-container {
+    position: relative;
+}
+
+.slick-prev, .slick-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+}
+
+.slick-prev:hover, .slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.slick-slider .slick-dots li button {
+    color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.slick-slider .slick-dots li.slick-active button {
+    background: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.slick-slider .slick-dots li button:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.slick-slider .slick-dots {
+    bottom: -30px;
+}
