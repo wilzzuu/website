@@ -33,7 +33,7 @@ const ProjectPage = () => {
             enabled: !!currentUser || currentUser === null,
             cacheTime: 72000000, // 2h cache time
             staleTime: 36000000, // 1h stale time
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             refetchOnReconnect: false,
             keepPreviousData: true,
         }

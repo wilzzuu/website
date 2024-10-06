@@ -1,41 +1,76 @@
-import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
+import React, { useState, useEffect, useRef } from 'react';
+import { useQuery, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase/firebase';
-import { collection, query, where, getDocs, updateDoc, doc, limit } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import AddProjectButton from '../components/AddProjectButton';
-
-const fetchProjects = async (user) => {
-    const projectRef = collection(db, 'projects');
-
-    let q;
-    if (user) {
-        q = query(projectRef, limit(10));
-    } else {
-        q = query(projectRef, where('isPublished', '==', true), limit(10));
-    }
-
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-};
-
+import Notification from '../components/Notification';
 
 const Portfolio = () => {
     const { currentUser } = useAuth();
+    const [notification, setNotification] = useState(null);
+    const queryClient = useQueryClient();
+    const prevProjectsRef = useRef([]);
 
     const { data: projects, isLoading, error } = useQuery(
         ['projects', currentUser],
-        () => fetchProjects(currentUser),
+        async () => {
+            const projectRef = collection(db, 'projects');
+            let q;
+            if (currentUser) {
+                q = query(projectRef, limit(10));
+            } else {
+                q = query(projectRef, where('isPublished', '==', true), limit(10));
+            }
+
+            const querySnapshot = await getDocs(q);
+            return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        },
         {
             enabled: !!currentUser || currentUser === null,
             cacheTime: 72000000, // 2h cache time
             staleTime: 36000000, // 1h stale time
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             refetchOnReconnect: false,
             keepPreviousData: true,
         }
     );
+
+    useEffect(() => {
+        if (projects) {
+          const projectRef = collection(db, 'projects');
+          let q;
+    
+          if (currentUser) {
+            q = query(projectRef, limit(10));
+          } else {
+            q = query(projectRef, where('isPublished', '==', true), limit(10));
+          }
+    
+          const unsubscribe = onSnapshot(q, (snapshot) => {
+            const newProjects = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+    
+            // Check if there are actual changes
+            if (prevProjectsRef.current.length && prevProjectsRef.current.length !== newProjects.length) {
+              setNotification('Projects have been added or updated.');
+              setTimeout(() => setNotification(null), 3000);
+            }
+    
+            // Update the queryClient cache
+            queryClient.setQueryData(['projects', currentUser], newProjects);
+    
+            // Update the previous projects ref
+            prevProjectsRef.current = newProjects;
+          });
+    
+          // Cleanup listener on component unmount
+          return () => unsubscribe();
+        }
+    }, [currentUser, queryClient]);
 
     const togglePublishStatus = async (projectId, currentStatus) => {
         const projectDoc = doc(db, 'projects', projectId);
@@ -48,11 +83,11 @@ const Portfolio = () => {
     };
 
     if (isLoading) return <div>Loading projects...</div>;
-
     if (error) return <p>Error: {error.message || JSON.stringify(error)}</p>;
 
     return (
         <div>
+            {notification && <Notification message={notification}/>}
             <div style={styles.container}>
                 <h1 style={styles.header}>My Projects</h1>
                 <p style={styles.header2}>Click on a project for details.</p>
