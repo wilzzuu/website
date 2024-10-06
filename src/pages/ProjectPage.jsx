@@ -7,9 +7,15 @@ import { useAuth } from '../context/AuthContext';
 import Carousel from '../components/Carousel';
 import DOMPurify from 'dompurify';
 
-const fetchProject = async(projectId) => {
+const fetchProject = async(user, projectId) => {
     const projectRef = collection(db, 'projects');
-    const q = query(projectRef, where('route', '==', projectId));
+
+    let q;
+    if (user) {
+        q = query(projectRef, where('route', '==', projectId));
+    } else {
+        q = query(projectRef, where('route', '==', projectId), where('isPublished', '==', true));
+    }
     const querySnapshot = await getDocs(q);
 
     if (!querySnapshot.empty) {
@@ -28,7 +34,7 @@ const ProjectPage = () => {
 
     const { data: project, isLoading, error } = useQuery(
         ['project', projectId],
-        () => fetchProject(projectId),
+        () => fetchProject(currentUser, projectId),
         {
             enabled: !!currentUser || currentUser === null,
             cacheTime: 72000000, // 2h cache time
