@@ -18,6 +18,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Check for dist folder
+        run: |
+          if [ ! -d "./dist" ]; then
+            echo "dist folder not found. Exiting...";
+            exit 1;
+          fi
+      
       - name: Install FTP Deployment Tool
         run: sudo apt-get install -y lftp
 
@@ -25,7 +43,7 @@ jobs:
         run: |
           lftp -d -c "
           set ssl:verify-certificate no;
-          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }};
+          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}; 
           mirror -R --verbose --only-newer --parallel=10 ./dist /public_html;
           bye;
           "
