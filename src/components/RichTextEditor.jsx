@@ -20,7 +20,7 @@ const RichTextEditor = ({ onSave }) => {
   return (
     <div>
       <ReactQuill theme="snow" value={content} onChange={handleContentChange} />
-      <button onClick={handleSave}>Save Content</button>
+      <button className='quill-save-button' onClick={handleSave}>Save Deep Dive Content</button>
     </div>
   );
 };

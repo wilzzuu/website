@@ -14,7 +14,7 @@ import Home from './pages/Home';
 {/*import Register from './pages/Register';*/}
 import Login from './pages/Login'
 import Portfolio from './pages/Portfolio';
-import AddProjectForm from './pages/AddProjectForm';
+import AddProjectForm from './components/AddProjectForm';
 import EditProject from './components/EditProject';
 import ProjectPage from './pages/ProjectPage';
 import TodoList from './pages/TodoList';

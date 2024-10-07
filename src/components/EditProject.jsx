@@ -4,6 +4,8 @@ import { db } from '../firebase/firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import '../styles/Global.css';
+import '../styles/EditProject.css';
 
 const EditProject = () => {
   const { projectId } = useParams();
@@ -52,8 +54,8 @@ const EditProject = () => {
 
   return (
     <div>
-      <h2>Edit Project</h2>
-      <form>
+      <h2 className='edit-project-header'>Edit Project</h2>
+      <form className='edit-project-form'>
         <div>
             <input
             type="text"
@@ -62,6 +64,7 @@ const EditProject = () => {
             onChange={handleInputChange}
             placeholder="Project Title"
             required
+            className='edit-project-title-input'
             />
         </div>
         <div>
@@ -71,6 +74,7 @@ const EditProject = () => {
             onChange={handleInputChange}
             placeholder="Project Description"
             required
+            className='edit-project-description-input'
             />
         </div>
         <div>
@@ -81,6 +85,7 @@ const EditProject = () => {
             onChange={handleInputChange}
             placeholder="Project Route"
             required
+            className='edit-project-route-input'
             />
         </div>
         <div>
@@ -90,10 +95,11 @@ const EditProject = () => {
             value={project.cardImage}
             onChange={handleInputChange}
             placeholder="Card Image URL"
+            className='edit-project-card-url-input'
             />
         </div>
         <div>
-        <label htmlFor="deepdive">Deepdive</label>
+        <h3 className='add-project-deep-dive-title'>Project Deep Dive</h3>
             <ReactQuill
                 value={project.deepdive}
                 onChange={handleDeepdiveChange}
@@ -101,7 +107,7 @@ const EditProject = () => {
                 formats={EditProject.formats}
             />
         </div>
-        <div>
+        <div className='edit-project-is-published'>
           <label htmlFor="isPublished">Publish</label>
           <input
             type="checkbox"
@@ -110,7 +116,7 @@ const EditProject = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="button" onClick={handleSave}>Save Changes</button>
+        <button className='edit-project-save-changes-button' type="button" onClick={handleSave}>Save Changes</button>
       </form>
     </div>
   );

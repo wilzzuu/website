@@ -1,0 +1,61 @@
+.edit-project-header {
+    text-align: center;
+    font-size: 38px;
+}
+
+.edit-project-form {
+    text-align: center;
+}
+
+.edit-project-title-input {
+    text-align: center;
+    font-size: 18px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.edit-project-description-input {
+    text-align: center;
+    font-size: 18px;
+    width: 500px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.edit-project-route-input {
+    text-align: center;
+    font-size: 18px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.edit-project-deep-dive-title {
+    text-align: center;
+    font-size: 28px;
+}
+
+.edit-project-card-url-input {
+    text-align: center;
+    font-size: 18px;
+    width: 500px;
+}
+
+.edit-project-form .quill {
+    width: 60%;
+    height: 300px;
+    margin: auto;
+    margin-bottom: 70px;
+}
+
+.edit-project-form .ql-container {
+    font-size: 16px;
+}
+
+.edit-project-is-published {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.edit-project-save-changes-button {
+    margin-bottom: 40px;
+}

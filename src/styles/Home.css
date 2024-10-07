@@ -29,7 +29,12 @@
     font-size: 18px;
     margin: 30px 0 auto;
 }
-/* add hover */
+
+.portfolio-button:hover {
+    text-align: center;
+    font-size: 18px;
+    margin: 30px 0 auto;
+}
 
 .about-section {
     background-color: #b69c8b;
@@ -107,8 +112,13 @@
 }
 
 .featured-project-link {
-    text-decoration: none;
+    text-decoration: underline;
     color: inherit;
+}
+
+.featured-project-link:hover {
+    text-decoration: underline;
+    color : rgb(255, 0, 0);
 }
 
 .featured-project-header {

@@ -17,11 +17,11 @@ export function AuthProvider({ children }) {
   // Listen for changes in authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+      setCurrentUser(user || null);
       setLoading(false);
     });
     return unsubscribe;
-  }, []);
+  }, [auth]);
 
   // Function to handle login
   function login(email, password) {

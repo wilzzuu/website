@@ -23,7 +23,7 @@ function Home() {
                     <h2 className='about-section-header'>About Me</h2>
                     <div className='about-section-text'>
                         <p>I'm a self-taught hobbyist developer with some experience spread across software, web and game development.</p>
-                        <p>I have been learning programming and doing personal projects since I was 15 years old (around 2017), using online resources such as Stack Overflow, YouTube tutorials and Quora (see next section).</p>
+                        <p>I have been learning programming and doing personal projects since I was 14 years old (around 2016), using online resources such as Stack Overflow, YouTube tutorials and Quora (see next section).</p>
                         <p>I am motivated to learn about programming and tech related topics and I am pursuing a career where I could apply my skills, while also acquiring new knowledge.</p>
                     </div>
                 </section>

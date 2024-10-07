@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useAuth } from '../context/AuthContext';
-import ImageUploadForm from './ImageUploadForm';
-import RichTextEditor from '../components/RichTextEditor';
+import ImageUploadForm from '../pages/ImageUploadForm';
+import RichTextEditor from './RichTextEditor';
 import '../styles/Global.css';
+import '../styles/AddProjectForm.css';
 
 const AddProjectForm = () => {
   const [title, setTitle] = useState('');
@@ -73,29 +74,38 @@ const AddProjectForm = () => {
 
   return (
     <div>
-      <h1>Add New Project</h1>
-      <form onSubmit={handleAddProject}>
-        <input
-          type="text"
-          placeholder="Project Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Project Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        ></textarea>
-        <h3>Project Deep Dive</h3>
-        <RichTextEditor value={deepdive} onChange={(e) => setDeepdive(e.target.value)}/>
-        <input
-          type="text"
-          placeholder="Card Image URL"
-          value={cardImage}
-          onChange={handleCardImageChange}
-        />
+      <h1 className='add-project-form-header'>Add New Project</h1>
+      <form onSubmit={handleAddProject} className='add-project-form'>
+        <div>
+            <input
+            type="text"
+            placeholder="Project Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className='add-project-title-input'
+            />
+        </div>
+        <div>
+            <textarea
+            placeholder="Project Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            className='add-project-description-input'
+            ></textarea>
+        </div>
+        <h3 className='add-project-deep-dive-title'>Project Deep Dive</h3>
+        <RichTextEditor className='add-project-deep-dive-editor' value={deepdive} onChange={(e) => setDeepdive(e.target.value)}/>
+        <div>
+            <input
+            type="text"
+            placeholder="Card Image URL"
+            value={cardImage}
+            onChange={handleCardImageChange}
+            className='add-project-card-url-input'
+            />
+        </div>
         <h3>Project Image URLs (1-10)</h3>
         {imageURLs.map((url, index) => (
             <div key={index}>

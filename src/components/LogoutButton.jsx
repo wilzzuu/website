@@ -1,16 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // For navigation after logout
-import { auth } from '../firebase/firebase'; // Import your Firebase configuration
-import { signOut } from 'firebase/auth'; // Import signOut function from Firebase
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../firebase/firebase';
+import { signOut } from 'firebase/auth';
+import '../styles/LogoutButton.css';
 
 const LogoutButton = () => {
-  const navigate = useNavigate(); // React Router's navigation hook
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         console.log('User logged out successfully.');
-        navigate('/login'); // Redirect to login page
+        navigate('/login');
       })
       .catch((error) => {
         console.error('Error logging out:', error);
@@ -18,23 +19,10 @@ const LogoutButton = () => {
   };
 
   return (
-    <button id="logoutButton"  onClick={handleLogout} style={styles.logoutButton}>
+    <button id="logoutButton"  onClick={handleLogout} className='logout-button'>
       Logout
     </button>
   );
-};
-
-// Optional inline styles for the button
-const styles = {
-  logoutButton: {
-    padding: '6px 15px',
-    backgroundColor: '#e06e6e',
-    color: '#fff',
-    border: 'none',
-    cursor: 'pointer',
-    borderRadius: '5px',
-    fontSize: '16px',
-  },
 };
 
 export default LogoutButton;

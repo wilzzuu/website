@@ -1,0 +1,49 @@
+.add-project-form-header {
+    text-align: center;
+    font-size: 38px;
+}
+
+.add-project-form {
+    text-align: center;
+}
+
+.add-project-title-input {
+    text-align: center;
+    font-size: 18px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.add-project-description-input {
+    text-align: center;
+    font-size: 18px;
+    width: 500px;
+    height: 100px;
+}
+
+.add-project-deep-dive-title {
+    text-align: center;
+    font-size: 28px;
+}
+
+.add-project-form .quill {
+    width: 60%;
+    height: 300px;
+    margin: auto;
+    margin-bottom: 70px
+}
+
+.add-project-form .ql-container {
+    font-size: 16px;
+}
+
+.quill-save-button {
+    margin-bottom: 40px;
+}
+
+.add-project-card-url-input {
+    text-align: center;
+    font-size: 18px;
+    width: 500px;
+    margin-bottom: 20px;
+}

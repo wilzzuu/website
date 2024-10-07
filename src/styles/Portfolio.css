@@ -50,11 +50,12 @@
 
 .portfolio-project-title {
     font-size: 24px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .portfolio-project-description {
     font-size: 16px;
+    margin-top: -10px;
 }
 
 .portfolio-project-image {
