@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
-import { auth, db } from '../firebase/firebase';
+import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } from 'firebase/firestore';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 import AddProjectButton from '../components/AddProjectButton';

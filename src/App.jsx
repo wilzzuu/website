@@ -7,8 +7,6 @@ import PrivateRoute from './PrivateRoute';
 import './index.css';
 
 import AddTransactionForm from './components/AddTransactionForm';
-import TransactionList from './components/TransactionList';
-
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 {/*import Register from './pages/Register';*/}
@@ -84,8 +82,7 @@ function App() {
                             element={
                                 <PrivateRoute>
                                     <FinancialTracker />
-                                        <AddTransactionForm />
-                                    <TransactionList />
+                                    <AddTransactionForm />
                                 </PrivateRoute>
                             }
                         />
