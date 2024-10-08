@@ -98,7 +98,12 @@ const Portfolio = () => {
     return (
         <AuthProvider>
             <div>
-                {notification && <Notification message={notification} style={{position: 'fixed', bottom: '10px', right: '10px', padding: '10px 20px', backgroundColor: '#333', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',}}/>}
+                {notification && (
+                    <Notification
+                        message={notification}
+                        style={{position: 'fixed', bottom: '10px', right: '10px', padding: '10px 20px', backgroundColor: '#333', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'}}
+                    />
+                )}
                 <div className='portfolio-container'>
                     <h1 className='portfolio-header'>My Projects</h1>
                     <p className='portfolio-header2'>Click on a project for details.</p>

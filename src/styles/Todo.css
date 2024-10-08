@@ -38,6 +38,13 @@
     margin-bottom: 20px;
 }
 
+.todo-clear-button {
+    height: 40px;
+    padding: 5px 24px;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
 .todo-list {
     margin-top: 0;
 }
