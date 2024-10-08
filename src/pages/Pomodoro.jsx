@@ -25,29 +25,31 @@ function Pomodoro() {
   };
 
   return (
-    <div className="pomodoro-container">
-      <div id="timer">
+    <div>
         <h1 className='pomodoro-header'>Pomodoro</h1>
-        <h2 className='pomodoro-timer-label'>{timerLabel}</h2>
-        <h1 id='pomodoro-timer'>{formatCountdown(time)}</h1>
-      </div>
-      <div id="focused-time">
-        <h3>Total Focused Time: {formatFocusedTime(focusedTime)}</h3>
-      </div>
-      <div id="section-container">
-        <button onClick={startTimer} id="start-button">
-          <img src={startIcon} alt="Start" />
-        </button>
-        <button onClick={pauseTimer} id="pause-button">
-          <img src={pauseIcon} alt="Pause" />
-        </button>
-        <button onClick={resetToWork} id="reset-button">
-          <img src={resetIcon} alt="Reset" />
-        </button>
-        <button onClick={switchToWork} id="work-button">Focus</button>
-        <button onClick={startShortBreak} id="short-break-button">Short break</button>
-        <button onClick={startLongBreak} id="long-break-button">Long Break</button>
-      </div>
+        <div className="pomodoro-container">
+            <div id="timer">
+                <h2 className='pomodoro-timer-label'>{timerLabel}</h2>
+                <h1 id='pomodoro-timer'>{formatCountdown(time)}</h1>
+            </div>
+            <div id="focused-time">
+                <h3>Total Focused Time: {formatFocusedTime(focusedTime)}</h3>
+            </div>
+            <div id="section-container">
+                <button onClick={startTimer} id="start-button">
+                <img src={startIcon} alt="Start" />
+                </button>
+                <button onClick={pauseTimer} id="pause-button">
+                <img src={pauseIcon} alt="Pause" />
+                </button>
+                <button onClick={resetToWork} id="reset-button">
+                <img src={resetIcon} alt="Reset" />
+                </button>
+                <button onClick={switchToWork} id="work-button">Focus</button>
+                <button onClick={startShortBreak} id="short-break-button">Short break</button>
+                <button onClick={startLongBreak} id="long-break-button">Long Break</button>
+            </div>
+        </div>
     </div>
   );
 }

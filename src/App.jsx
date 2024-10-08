@@ -15,7 +15,7 @@ import Portfolio from './pages/Portfolio';
 import AddProjectForm from './components/AddProjectForm';
 import EditProject from './components/EditProject';
 import ProjectPage from './pages/ProjectPage';
-import TodoList from './pages/TodoList';
+import TodoList from './pages/Todo';
 import Pomodoro from './pages/Pomodoro';
 import FinancialTracker from './pages/FinancialTracker';
 import WeekPlanner from './pages/WeekPlanner';
