@@ -1,0 +1,34 @@
+.pomodoro-container {
+    text-align: center;
+}
+
+.pomodoro-header {
+    text-align: center;
+    font-size: 38px;
+    margin: 10px 0 20px;
+}
+
+.pomodoro-timer-label {
+    text-align: center;
+    font-size: 38px;
+    margin: 120px 0 20px;
+}
+
+.pomodoro-container #pomodoro-timer {
+    font-size: 140px;
+    margin-top: -40px;
+}
+
+.pomodoro-container #focused-time{
+    font-size: 20px;
+    margin-top: -40px;
+}
+
+.pomodoro-container #start-button, #pause-button, #reset-button {
+    width: 60px;
+    margin-left: 8px;
+}
+
+.pomodoro-container #work-button, #short-break-button, #long-break-button {
+    margin-left: 8px;
+}

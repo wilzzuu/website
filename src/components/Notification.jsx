@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const notificationStyle = {
-  position: 'fixed',
-  bottom: '10px',
-  right: '10px',
-  padding: '10px 20px',
-  backgroundColor: '#333',
-  color: '#fff',
-  borderRadius: '5px',
-  zIndex: 1000,
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
-};
+const Notification = ({ message, style, soundURL, onClick }) => {
+    const audioRef = useRef(null);
 
-const Notification = ({ message }) => {
-  return (
-    <div style={notificationStyle}>
-      {message}
-    </div>
-  );
+    useEffect(() => {
+        if (message && soundURL && audioRef.current) {
+            audioRef.current.volume = 0.3
+            audioRef.current.play().catch((err) => {
+                console.warn("Failed to play sound: ", err);
+            });
+        }
+    }, [message, soundURL]);
+
+    return (
+        <div style={style}>
+            {onClick ? (
+            <button onClick={onClick} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}>
+            {message}
+            </button>
+            ) : (
+                message
+            )}
+        {soundURL && (
+            <audio ref={audioRef}>
+                <source src={soundURL} type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
+        )}
+        </div>
+    );
 };
 
 export default Notification;
