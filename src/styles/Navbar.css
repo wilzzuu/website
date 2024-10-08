@@ -9,7 +9,7 @@
 .navigationBar ul {
     list-style-type: none;
     display: flex;
-    gap: 14px;
+    gap: 30px;
 }
 
 .navigationBar li {
