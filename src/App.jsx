@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './context/AuthContext';
 import { PomodoroProvider } from './context/PomodoroContext';
+import { TodoProvider } from './context/TodoContext';
 import PrivateRoute from './PrivateRoute';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -42,6 +43,7 @@ function App() {
         <AuthProvider>
                 <Router>
                 <PomodoroProvider>
+                <TodoProvider>
                     <div>
                         <Navbar />
                         <Routes>
@@ -104,6 +106,7 @@ function App() {
                             />
                         </Routes>
                     </div>
+                    </TodoProvider>
                     </PomodoroProvider>
                 </Router>
         </AuthProvider>

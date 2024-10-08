@@ -106,30 +106,30 @@ export const PomodoroProvider = ({ children }) => {
         return () => clearInterval(intervalId);
     }, [intervalId]);
 
-  return (
-    <PomodoroContext.Provider
-        value={{
-            time,
-            isRunning,
-            timerLabel,
-            focusedTime,
-            startTimer,
-            pauseTimer,
-            switchToWork,
-            startShortBreak,
-            startLongBreak,
-            resetToWork,
-        }}
-    >
-        {notification && (
-            <Notification
-                message={notification}
-                style={{position: 'fixed', top: '100px', right: '20px', padding: '20px 30px', backgroundColor: '#eab119', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontSize: '18px'}}
-                soundURL={notificationSoundURL}
-                onClick={handleNotificationClick}
-            />
-        )}    
-        {children}
-    </PomodoroContext.Provider>
-  );
+    return (
+        <PomodoroContext.Provider
+            value={{
+                time,
+                isRunning,
+                timerLabel,
+                focusedTime,
+                startTimer,
+                pauseTimer,
+                switchToWork,
+                startShortBreak,
+                startLongBreak,
+                resetToWork,
+            }}
+        >
+            {notification && (
+                <Notification
+                    message={notification}
+                    style={{position: 'fixed', top: '100px', right: '20px', padding: '20px 30px', backgroundColor: '#eab119', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)', fontSize: '18px'}}
+                    soundURL={notificationSoundURL}
+                    onClick={handleNotificationClick}
+                />
+            )}    
+            {children}
+        </PomodoroContext.Provider>
+    );
 };
