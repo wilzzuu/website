@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './context/AuthContext';
 import { PomodoroProvider } from './context/PomodoroContext';
 import PrivateRoute from './PrivateRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 import AddTransactionForm from './components/AddTransactionForm';
 import Navbar from './components/Navbar';
@@ -49,7 +50,14 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/portfolio" element={<Portfolio />} />
                             <Route path="/portfolio/:projectId" element={<ProjectPage />} />
-                            <Route path="/edit-project/:projectId" element={<EditProject />} />
+                            <Route 
+                                path="/edit-project/:projectId"
+                                element={
+                                    <PrivateRoute>
+                                        <EditProject />
+                                    </PrivateRoute>
+                                } 
+                            />
                             <Route
                                 path="/portfolio/addproject" 
                                 element={
@@ -58,26 +66,23 @@ function App() {
                                     </PrivateRoute>
                                 } 
                             />
-                            <Route path="/CV" element={
-                                <PrivateRoute>
-                                    <CV />
-                                </PrivateRoute>
+                            <Route path="/cv"
+                                element={
+                                    <PrivateRoute>
+                                        <CV />
+                                    </PrivateRoute>
                                 }
                             />
                             <Route
                                 path="/todo"
                                 element={
-                                    <PrivateRoute>
-                                        <TodoList />
-                                    </PrivateRoute>
+                                    <TodoList />
                                 }
                             />
                             <Route
                                 path="/pomodoro"
                                 element={
-                                    <PrivateRoute>
-                                        <Pomodoro />
-                                    </PrivateRoute>
+                                    <Pomodoro />
                                 }
                             />
                             <Route
@@ -93,7 +98,7 @@ function App() {
                                 path="/weekplanner"
                                 element={
                                     <PrivateRoute>
-                                    <WeekPlanner />
+                                        <WeekPlanner />
                                     </PrivateRoute>
                                 }
                             />

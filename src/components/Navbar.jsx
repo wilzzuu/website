@@ -12,11 +12,11 @@ function Navbar() {
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/portfolio">Portfolio</Link></li>
+        <li><Link to="/todo">TODO List</Link></li>
+        <li><Link to="/pomodoro">Pomodoro</Link></li>
         {currentUser ? (
             <>
                 <li><Link to="/CV">CV</Link></li>
-                <li><Link to="/todo">TODO List</Link></li>
-                <li><Link to="/pomodoro">Pomodoro</Link></li>
                 <li><Link to="/finance">Financial Tracker</Link></li>
                 <li><Link to="/weekplanner">Week Planner</Link></li>
                 <p id="loggedInText">Logged in as: {currentUser.email.split("@website.local")}</p>
