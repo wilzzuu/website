@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTodo } from '../context/TodoContext';
 import '../styles/Todo.css';
 
 function Todo() {
     const { tasks, task, sizeNotification, clearedNotification, addTask, removeTask, clearTasks, handleInputChange } = useTodo();
+
+    useEffect(() => {
+        localStorage.setItem('todo-tasks', JSON.stringify(tasks));
+    }, [tasks]);
 
     return (
         <div>

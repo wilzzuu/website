@@ -16,6 +16,7 @@
 
 .week-planner-card {
     width: 95%;
+    background-color: #b69c8b;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 5px;
@@ -34,7 +35,7 @@
 }
 
 .week-planner-activity-item {
-    background-color: #b69c8b;
+    background-color: #9d7860;
     margin-top: 8px;
     padding: 5px 10px;
     border-radius: 5px;

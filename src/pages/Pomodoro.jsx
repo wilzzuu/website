@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { usePomodoro } from '../context/PomodoroContext';
 import startIcon from '../assets/play.svg';
 import pauseIcon from '../assets/pause.svg';
@@ -6,7 +6,20 @@ import resetIcon from '../assets/circle-arrow.svg';
 import '../styles/Pomodoro.css'
 
 function Pomodoro() {
-    const { time, timerLabel, focusedTime, startTimer, pauseTimer, switchToWork, startShortBreak, startLongBreak, resetToWork } = usePomodoro();
+    const { time, isRunning, initialLoad, startTime, timerLabel, focusedTime, startTimer, pauseTimer, switchToWork, startShortBreak, startLongBreak, resetToWork } = usePomodoro();
+    
+    useEffect(() => {
+        if (!initialLoad.current) {
+          const pomodoroState = {
+            time,
+            isRunning,
+            timerLabel,
+            focusedTime,
+            startTime,
+          };
+          localStorage.setItem('pomodoro-timer-state', JSON.stringify(pomodoroState));
+        }
+    }, [time, isRunning, timerLabel, focusedTime, startTime]);
 
     // Format the countdown timer as mm:ss
     const formatCountdown = (time) => {

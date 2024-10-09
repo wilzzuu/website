@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
+import Notification from '../components/Notification';
 
 // Create the context
 const TodoContext = createContext();
@@ -14,6 +14,15 @@ export const TodoProvider = ({ children }) => {
     const [task, setTask] = useState(''); // State for the current input
     const [sizeNotification, setSizeNotification] = useState(null);
     const [clearedNotification, setClearedNotification] = useState(null);
+
+    useEffect(() => {
+        const savedTasks = localStorage.getItem('todo-tasks');
+        if (savedTasks) {
+            setTasks(JSON.parse(savedTasks));
+        }
+    }, []);
+
+    
 
     const handleInputChange = (e) => {
         setTask(e.target.value); // Update task as user types

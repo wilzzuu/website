@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import Notification from '../components/Notification';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,9 +20,23 @@ export const PomodoroProvider = ({ children }) => {
     const [startTime, setStartTime] = useState(null);
     const [notification, setNotification] = useState(null);
 
+    const initialLoad = useRef(true);
     const navigate = useNavigate();
 
     const notificationSoundURL = 'https://wilzzu.xyz/assets/sounds/pomodoro-alarm.mp3'
+
+    useEffect(() => {
+        const savedState = JSON.parse(localStorage.getItem('pomodoro-timer-state'));
+        if (savedState) {
+            setTime(savedState.time || 25 * 60);
+            setIsRunning(savedState.isRunning || false);
+            setTimerLabel(savedState.timerLabel || 'Focus');
+            setFocusedTime(savedState.focusedTime || 0);
+            setStartTime(savedState.startTime || null);
+        }
+        initialLoad.current = false; // Set the initial load to false after loading saved state
+    }, []);
+
 
     const handlePomodoroComplete = () => {
         setNotification('Pomodoro complete! Click to view.');
@@ -36,36 +50,35 @@ export const PomodoroProvider = ({ children }) => {
     // Start the timer
     const startTimer = () => {
         if (!isRunning) {
-        setIsRunning(true);
-        if (!startTime) setStartTime(Date.now()); // Record the start time only if not previously set
-
-        const id = setInterval(() => {
-            setTime((prevTime) => {
-            if (prevTime > 0) {
-                return prevTime - 1;
-            } else {
-                clearInterval(id);
-                setIsRunning(false);
-                setFocusedTime((prevFocusedTime) => prevFocusedTime + 25 * 60); // Increment focused time by the session duration
-                handlePomodoroComplete();
-                return 0; // Stop timer at 0
-            }
-            });
-        }, 1000);
-        setIntervalId(id);
+            setIsRunning(true);
+            setStartTime(Date.now()); // Record the start time only if not previously set
+            const id = setInterval(() => {
+                setTime((prevTime) => {
+                if (prevTime > 0) {
+                    return prevTime - 1;
+                } else {
+                    clearInterval(id);
+                    setIsRunning(false);
+                    setFocusedTime((prevFocusedTime) => prevFocusedTime + 25 * 60); // Increment focused time by the session duration
+                    handlePomodoroComplete();
+                    return 0; // Stop timer at 0
+                }
+                });
+            }, 1000);
+            setIntervalId(id);
         }
     };
 
     // Pause the timer
     const pauseTimer = () => {
         if (isRunning) {
-        clearInterval(intervalId);
-        setIsRunning(false);
-        if (startTime) {
-            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-            setFocusedTime((prevFocusedTime) => prevFocusedTime + elapsedTime);
-            setStartTime(null);
-        }
+            clearInterval(intervalId);
+            setIsRunning(false);
+            if (startTime) {
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                setFocusedTime((prevFocusedTime) => prevFocusedTime + elapsedTime);
+                setStartTime(null);
+            }
         }
     };
 
@@ -110,6 +123,7 @@ export const PomodoroProvider = ({ children }) => {
         <PomodoroContext.Provider
             value={{
                 time,
+                initialLoad,
                 isRunning,
                 timerLabel,
                 focusedTime,
