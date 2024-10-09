@@ -2,9 +2,12 @@
     position: sticky;
     top: 0;
     background-color: #333;
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
     z-index: 100000;
-    max-width: 100%;
+    width: 100%
 }
 
 .navigationBar ul {
@@ -27,20 +30,20 @@
     color : rgb(255, 0, 0);
 }
 
-#logoutButton {
-    position: fixed;
+.navigationBar #logoutButton {
+    position: absolute;
     top: 20px;
     right: 20px;
 }
 
-#loginButton {
-    position: fixed;
+.navigationBar #loginButton {
+    position: absolute;
     top: 20px;
     right: 20px;
 }
 
-#loggedInText {
-    position: fixed;
+.navigationBar #loggedInText {
+    position: absolute;
     top: 6px;
     right: 120px;
 }

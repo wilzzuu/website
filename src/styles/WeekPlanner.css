@@ -1,0 +1,71 @@
+.week-planner-page-container {
+    text-align: center;
+}
+
+.week-planner-header {
+    text-align: center;
+    font-size: 38px;
+    margin: 10px 0 20px;
+}
+
+.week-planner-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.week-planner-card {
+    width: 95%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.week-planner-day-header {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.week-planner-activity-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.week-planner-activity-item {
+    background-color: #b69c8b;
+    margin-top: 8px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.week-planner-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.week-planner-time-input {
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 35%;
+}
+
+.week-planner-text-input {
+    margin-right: 5px;
+    padding: 7.5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 40%;
+}
+
+.week-planner-add-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #28a745;
+}

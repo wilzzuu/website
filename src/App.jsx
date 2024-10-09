@@ -44,8 +44,8 @@ function App() {
                 <Router>
                 <PomodoroProvider>
                 <TodoProvider>
+                <Navbar />
                     <div>
-                        <Navbar />
                         <Routes>
                             <Route path="/" element={<Home />} />
                             {/*<Route path="/register" element={<Register />} />*/}
