@@ -4,6 +4,7 @@
     background-color: #333;
     padding: 10px;
     z-index: 100000;
+    max-width: 100%;
 }
 
 .navigationBar ul {

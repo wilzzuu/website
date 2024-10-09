@@ -19,7 +19,7 @@ import EditProject from './components/EditProject';
 import ProjectPage from './pages/ProjectPage';
 import TodoList from './pages/Todo';
 import Pomodoro from './pages/Pomodoro';
-import FinancialTracker from './pages/FinancialTracker';
+import FinanceTracker from './pages/FinanceTracker';
 import WeekPlanner from './pages/WeekPlanner';
 import CV from './pages/CV';
 
@@ -53,7 +53,7 @@ function App() {
                             <Route path="/portfolio" element={<Portfolio />} />
                             <Route path="/portfolio/:projectId" element={<ProjectPage />} />
                             <Route 
-                                path="/edit-project/:projectId"
+                                path="/portfolio/edit-project/:projectId"
                                 element={
                                     <PrivateRoute>
                                         <EditProject />
@@ -91,8 +91,7 @@ function App() {
                                 path="/finance"
                                 element={
                                     <PrivateRoute>
-                                        <FinancialTracker />
-                                        <AddTransactionForm />
+                                        <FinanceTracker />
                                     </PrivateRoute>
                                 }
                             />

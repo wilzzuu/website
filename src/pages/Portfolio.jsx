@@ -89,7 +89,7 @@ const Portfolio = () => {
     };
       
     const handleEditProject = (projectId) => {
-        window.location.href = `/edit-project/${projectId}`;
+        window.location.href = `/portfolio/edit-project/${projectId}`;
     };
 
     if (isLoading) return <div>Loading projects...</div>;

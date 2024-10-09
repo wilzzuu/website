@@ -1,0 +1,40 @@
+.add-transaction-form {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+.add-transaction-selector {
+    height: 35px;
+    width: 100px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.add-transaction-amount {
+    height: 35px;
+    width: 120px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.add-transaction-category {
+    height: 35px;
+    width: 250px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.add-transaction-description {
+    height: 35px;
+    width: 600px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.add-transaction-button {
+    padding: 8px 12px;
+}

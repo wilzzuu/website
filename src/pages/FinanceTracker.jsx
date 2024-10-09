@@ -1,20 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } from 'firebase/firestore';
-import { AuthProvider, useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase/firebase';
 import Notification from '../components/Notification';
+import FinanceTable from '../components/FinanceTable';
+import AddTransactionForm from '../components/AddTransactionForm';
 import '../styles/Global.css';
-import '../styles/FinancialTracker.css';
+import '../styles/FinanceTracker.css';
 
-function FinancialTracker() {
+function FinanceTracker() {
     const { currentUser } = useAuth();
     const [notification, setNotification] = useState(null);
     const queryClient = useQueryClient();
     const prevTransactionRef = useRef([]);
 
     const { data: transactions, isLoading, error } = useQuery(
-        ['transatcions', currentUser],
+        ['transactions', currentUser],
         async () => {
             const transactionRef = collection(db, 'transactions');
             let q;
@@ -26,12 +28,12 @@ function FinancialTracker() {
             return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         },
         {
-            enabled: !!currentUser || currentUser === null,
-            cacheTime: 72000000, // 2h cache time
-            staleTime: 36000000, // 1h stale time
+            enabled: !!currentUser,
+            cacheTime: 1000 * 60 * 60 * 24, // 2h cache time
+            staleTime: 1000 * 60 * 30, // 1h stale time
             refetchOnWindowFocus: false,
+            refetchOnMount: false,
             refetchOnReconnect: false,
-            keepPreviousData: false,
         }
     );
 
@@ -60,30 +62,19 @@ function FinancialTracker() {
             });
             return () => unsubscribe();
         }
-    }, [queryClient]);
+    }, [queryClient, currentUser]);
 
     if (isLoading) return <div>Loading transactions...</div>;
     if (error) { return <div>Error: {error}</div>; }
 
     return (
-        <div>
+        <div className='finance-tracker-container'>
             {notification && <Notification message={notification}/>}
-            <h1>Financial Tracker</h1>
-            <p>Track your finances here!</p>
-            <h2>Your Transactions</h2>
-            <ul>
-                {transactions.length > 0 ? (
-                transactions.map((txn) => (
-                    <li key={txn.id}>
-                    {txn.type === 'income' ? '+' : '-'}${txn.amount} - {txn.category}
-                    </li>
-                ))
-                ) : (
-                <p>No transactions found.</p>
-                )}
-            </ul>
+            <h1 className='finance-tracker-header'>Finance Tracker</h1>
+            <AddTransactionForm />
+            {transactions && <FinanceTable transactions={transactions} />}
         </div>
     );
 }
 
-export default FinancialTracker;
+export default FinanceTracker;

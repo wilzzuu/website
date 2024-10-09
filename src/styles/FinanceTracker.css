@@ -1,0 +1,12 @@
+.finance-tracker-container {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    height: auto;
+}
+
+.finance-tracker-header {
+    text-align: center;
+    font-size: 36px;
+    margin: 10px 0 20px;
+}
