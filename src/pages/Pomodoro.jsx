@@ -50,13 +50,13 @@ function Pomodoro() {
                 </div>
                 <div id="section-container">
                     <button onClick={startTimer} id="start-button">
-                    <img src={startIcon} alt="Start" />
+                        <img src={startIcon} alt="Start" />
                     </button>
                     <button onClick={pauseTimer} id="pause-button">
-                    <img src={pauseIcon} alt="Pause" />
+                        <img src={pauseIcon} alt="Pause" />
                     </button>
                     <button onClick={resetToWork} id="reset-button">
-                    <img src={resetIcon} alt="Reset" />
+                        <img src={resetIcon} alt="Reset" />
                     </button>
                     <button onClick={switchToWork} id="work-button">Focus</button>
                     <button onClick={startShortBreak} id="short-break-button">Short break</button>

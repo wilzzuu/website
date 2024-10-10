@@ -70,3 +70,39 @@
     border: none;
     background-color: #28a745;
 }
+
+.week-planner-activity-container {
+    display: flex;
+}
+
+.week-planner-strong {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.week-planner-buttons {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.week-planner-edit-button {
+    color: inherit;
+    height: 25px;
+    width: 20px;
+    margin-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.week-planner-remove-button {
+    color: inherit;
+    height: 25px;
+    width: 20px;
+    margin-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

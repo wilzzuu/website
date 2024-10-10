@@ -22,9 +22,12 @@ function Home() {
                 <section className="about-section">
                     <h2 className='about-section-header'>About Me</h2>
                     <div className='about-section-text'>
-                        <p>I'm a self-taught hobbyist developer with some experience spread across software, web and game development.</p>
-                        <p>I have been learning programming and doing personal projects since I was 14 years old (around 2016), using online resources such as Stack Overflow, YouTube tutorials and Quora (see next section).</p>
-                        <p>I am motivated to learn about programming and tech related topics and I am pursuing a career where I could apply my skills, while also acquiring new knowledge.</p>
+                        <p>
+                            I'm a self-taught hobbyist developer with some experience spread across software, web and game development.<br/>
+                            I have been learning programming and doing personal projects since around 2016, when I was 14 years old,
+                            using online resources such as Stack Overflow, YouTube tutorials and Quora (next section for details).<br/>
+                            I am motivated to learn more about programming and tech related topics and I am pursuing a career where I could apply my skills, while also acquiring new knowledge.<br/>
+                        </p>
                     </div>
                 </section>
                 <section className="tools-section">
@@ -36,6 +39,7 @@ function Home() {
                         <li>React</li>
                         <li>Node.js</li>
                         <li>Python</li>
+                        <li>SQlite3</li>
                         <li>C#</li>
                         <li>Godot Engine</li>
                         <li>Unity Engine</li>

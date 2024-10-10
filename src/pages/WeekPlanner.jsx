@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import editIcon from '../assets/edit.svg';
+import removeIcon from '../assets/remove.svg';
 import '../styles/WeekPlanner.css';
 
 // Get the current week's dates
@@ -107,7 +109,17 @@ const DayCard = ({ day, date, activities = [], addActivity }) => {
             <ul className='week-planner-activity-list'>
                 {activities.map((activity, index) => (
                     <li key={index} className='week-planner-activity-item'>
-                        <strong>{activity.time}:</strong> {activity.description}
+                        <div className='week-planner-activity-container'>
+                            <strong className='week-planner-strong'>{activity.time}:</strong> {activity.description}
+                            <div className='week-planner-buttons'>
+                                <button className='week-planner-edit-button'>
+                                    <img src={editIcon} alt="Edit"  className='week-planner-edit-icon' />
+                                </button>
+                                <button className='week-planner-remove-button'>
+                                    <img src={removeIcon} alt="Remove" className='week-planner-remove-icon' />
+                                </button>
+                            </div>
+                        </div>
                     </li>
                 ))}
             </ul>
