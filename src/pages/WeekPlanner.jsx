@@ -18,6 +18,8 @@ const getCurrentWeekDates = () => {
 const WeekPlanner = () => {
     const [activities, setActivities] = useState({});
     const [weekDates, setWeekDates] = useState([]);
+    const [errNotification, setErrNotification] = useState(null);
+    const [notification, setNotification] = useState(null);
   
     // Initialize empty activity lists for each day
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -79,6 +81,10 @@ const WeekPlanner = () => {
                     addActivity={addActivity}
                     editActivity={editActivity}
                     removeActivity={removeActivity}
+                    errNotification={errNotification}
+                    setErrNotification={setErrNotification}
+                    notification={notification}
+                    setNotification={setNotification}
                 />
                 ))}
             </div>
@@ -87,20 +93,31 @@ const WeekPlanner = () => {
 };
 
 // DayCard Component to display individual day activities and input fields
-const DayCard = ({ day, date, activities = [], addActivity, editActivity, removeActivity }) => {
+const DayCard = ({ day, date, activities = [], addActivity, editActivity, removeActivity, notification, setNotification, errNotification, setErrNotification }) => {
     const [time, setTime] = useState('');
     const [description, setDescription] = useState('');
     const [editingIndex, setEditingIndex] = useState(-1);
-    const [errNotification, setErrNotification] = useState(null);
-    const [notification, setNotification] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(null);
   
     // Add a new activity to the list
     const handleAddActivity = () => {
-      if (time && description) {
+        if (time && description) {
             addActivity(day, { time, description });
             setTime('');
             setDescription('');
-      }
+            setActiveIndex(null);
+            setNotification(`Added activity "${description}" @${time} for ${day}`)
+            setTimeout(() => setNotification(null), 5000);
+        } else if (time && !description) {
+            setErrNotification('Cannot add activity with null description')
+            setTimeout(() => setErrNotification(null), 5000);
+        } else if (!time && !description) {
+            setErrNotification('Cannot add activity with null time and description')
+            setTimeout(() => setErrNotification(null), 5000);
+        } else if (!time && description) {
+            setErrNotification('Cannot add activity with null time')
+            setTimeout(() => setErrNotification(null), 5000);
+        }
     };
 
     const handleEditActivity = (index) => {
@@ -116,6 +133,9 @@ const DayCard = ({ day, date, activities = [], addActivity, editActivity, remove
             setEditingIndex(-1);
             setTime('');
             setDescription('');
+            setActiveIndex(null);
+            setNotification(`Edited activity nr. ${editingIndex+1} -> "${description}" @${time} for ${day}`)
+            setTimeout(() => setNotification(null), 5000);
         }
     };
 
@@ -129,6 +149,12 @@ const DayCard = ({ day, date, activities = [], addActivity, editActivity, remove
   
     return (
         <div>
+            {notification && (
+                <Notification
+                    message={notification}
+                    style={{position: 'fixed', bottom: '10px', right: '10px', padding: '10px 20px', backgroundColor: '#333', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'}}
+                />
+            )}
             {errNotification && (
             <Notification
                 message={errNotification}
@@ -157,27 +183,28 @@ const DayCard = ({ day, date, activities = [], addActivity, editActivity, remove
                 <ul className='week-planner-activity-list'>
                     {activities.map((activity, index) => (
                         <li key={index} className='week-planner-activity-item'>
-                            <div className='week-planner-activity-content'>
+                            <div className='week-planner-activity-content' onClick={() => setActiveIndex(index === activeIndex ? null : index)}>
                                 <strong id='week-planner-strong'>{activity.time}: </strong>{activity.description}
                             </div>
-                            <div className='week-planner-buttons'>
-                                {editingIndex === index ? (
-                                    <>
-                                        <button id='week-planner-save-button' onClick={handleSaveActivity}>Save</button>
-                                        <button id='week-planner-cancel-button' onClick={handleCancelEdit}>Cancel</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <button id='week-planner-edit-button' onClick={() => handleEditActivity(index)}>
-                                            <img src={editIcon} alt="Edit"  className='week-planner-edit-icon' />
-                                        </button>
-                                        <button id='week-planner-remove-button' onClick={() => removeActivity(day, index)}>
-                                            <img src={removeIcon} alt="Remove" className='week-planner-remove-icon' />
-                                        </button>
-                                    </>
-                                )}
-                                
-                            </div>
+                            {activeIndex === index && (
+                                <div className='week-planner-buttons'>
+                                    {editingIndex === index ? (
+                                        <>
+                                            <button id='week-planner-save-button' onClick={handleSaveActivity}>Save</button>
+                                            <button id='week-planner-cancel-button' onClick={handleCancelEdit}>Cancel</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <button id='week-planner-edit-button' onClick={(e) => {e.stopPropagation(); handleEditActivity(index)}}>
+                                                <img src={editIcon} alt="Edit"  className='week-planner-edit-icon' />
+                                            </button>
+                                            <button id='week-planner-remove-button' onClick={(e) => {e.stopPropagation(); removeActivity(day, index), setActiveIndex(null)}}>
+                                                <img src={removeIcon} alt="Remove" className='week-planner-remove-icon' />
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>
