@@ -28,20 +28,6 @@
     margin-bottom: 10px;
 }
 
-.week-planner-activity-list {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 10px;
-}
-
-.week-planner-activity-item {
-    background-color: #9d7860;
-    margin-top: 8px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
 .week-planner-input-container {
     display: flex;
     justify-content: space-between;
@@ -71,37 +57,64 @@
     background-color: #28a745;
 }
 
-.week-planner-activity-container {
-    display: flex;
+.week-planner-activity-list {
+    list-style-type: none;
+    padding: 0;
 }
 
-.week-planner-strong {
-    display: flex;
-    justify-content: left;
+.week-planner-activity-item {
+    background-color: #9d7860;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    justify-content: center;
     align-items: center;
+}
+
+.week-planner-activity-content {
+    padding: 10px;
 }
 
 .week-planner-buttons {
     display: flex;
-    justify-content: right;
-    align-items: right;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 8px;
+    padding-top: 0;
 }
 
-.week-planner-edit-button {
+.week-planner-buttons #week-planner-edit-button {
     color: inherit;
     height: 25px;
-    width: 20px;
-    margin-left: 8px;
+    width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.week-planner-remove-button {
+.week-planner-buttons #week-planner-save-button {
+    background-color: #28a745;
+    height: 25px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.week-planner-buttons #week-planner-remove-button {
     color: inherit;
     height: 25px;
     width: 20px;
-    margin-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.week-planner-buttons #week-planner-cancel-button {
+    background-color: #a72828;
+    height: 25px;
+    width: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
