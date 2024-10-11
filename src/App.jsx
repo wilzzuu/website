@@ -21,6 +21,7 @@ import TodoList from './pages/Todo';
 import Pomodoro from './pages/Pomodoro';
 import FinanceTracker from './pages/FinanceTracker';
 import WeekPlanner from './pages/WeekPlanner';
+import Calendar from './pages/Calendar';
 import CV from './pages/CV';
 
 import './index.css';
@@ -52,6 +53,18 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/portfolio" element={<Portfolio />} />
                             <Route path="/portfolio/:projectId" element={<ProjectPage />} />
+                            <Route
+                                path="/todo"
+                                element={
+                                    <TodoList />
+                                }
+                            />
+                            <Route
+                                path="/pomodoro"
+                                element={
+                                    <Pomodoro />
+                                }
+                            />
                             <Route 
                                 path="/portfolio/edit-project/:projectId"
                                 element={
@@ -68,23 +81,20 @@ function App() {
                                     </PrivateRoute>
                                 } 
                             />
-                            <Route path="/cv"
+                            <Route 
+                                path="/cv"
                                 element={
                                     <PrivateRoute>
                                         <CV />
                                     </PrivateRoute>
                                 }
                             />
-                            <Route
-                                path="/todo"
+                            <Route 
+                                path="/calendar"
                                 element={
-                                    <TodoList />
-                                }
-                            />
-                            <Route
-                                path="/pomodoro"
-                                element={
-                                    <Pomodoro />
+                                    <PrivateRoute>
+                                        <Calendar />
+                                    </PrivateRoute>
                                 }
                             />
                             <Route
