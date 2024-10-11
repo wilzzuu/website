@@ -10,7 +10,6 @@ const LogoutButton = () => {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        console.log('User logged out successfully.');
         navigate('/login');
       })
       .catch((error) => {

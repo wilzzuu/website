@@ -72,7 +72,6 @@ const Portfolio = () => {
                 queryClient.setQueryData(['projects', authStatus], newProjects);
                 
                 prevProjectsRef.current = newProjects;
-                console.log('authStatus: ', authStatus);
             });
             
             return () => unsubscribe();

@@ -19,7 +19,6 @@ export default function Login() {
     try {
       setError('');
       setLoading(true);
-      console.log("Current user: ", currentUser)
       await login(email, password);
       navigate('/login');
     } catch {
