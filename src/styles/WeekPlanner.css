@@ -50,6 +50,13 @@
     width: 40%;
 }
 
+.week-planner-color-picker {
+    width: 80%;
+    height: 24px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
 .week-planner-add-button {
     padding: 5px 10px;
     border-radius: 5px;
@@ -63,7 +70,6 @@
 }
 
 .week-planner-activity-item {
-    background-color: #9d7860;
     padding: 0 10px;
     border-radius: 5px;
     margin-bottom: 5px;

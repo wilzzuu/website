@@ -52,13 +52,13 @@ const WeekPlanner = () => {
     const addActivity = (day, activity) => {
         setActivities((prevActivities) => ({
             ...prevActivities,
-            [day]: [...(prevActivities[day] || []), activity], // Use empty array if day is not defined
+            [day]: [...(prevActivities[day] || []), { ...activity, color: activity.color}], // Use empty array if day is not defined
         }));
     };
 
     const editActivity = (day, index, updatedActivity) => {
         const updatedActivities = { ...activities };
-        updatedActivities[day][index] = updatedActivity;
+        updatedActivities[day][index] = { ...updatedActivity, color: updatedActivity.color};
         setActivities(updatedActivities);
     };
 
@@ -98,13 +98,15 @@ const DayCard = ({ day, date, activities = [], addActivity, editActivity, remove
     const [description, setDescription] = useState('');
     const [editingIndex, setEditingIndex] = useState(-1);
     const [activeIndex, setActiveIndex] = useState(null);
+    const [color, setColor] = useState('#9d7860');
   
     // Add a new activity to the list
     const handleAddActivity = () => {
         if (time && description) {
-            addActivity(day, { time, description });
+            addActivity(day, { time, description, color });
             setTime('');
             setDescription('');
+            setColor('#9d7860')
             setActiveIndex(null);
             setNotification(`Added activity "${description}" @${time} for ${day}`)
             setTimeout(() => setNotification(null), 5000);
@@ -125,14 +127,16 @@ const DayCard = ({ day, date, activities = [], addActivity, editActivity, remove
         setEditingIndex(index);
         setTime(activity.time);
         setDescription(activity.description);
+        setColor(activity.color || '#9d7860');
     };
 
     const handleSaveActivity = () => {
         if (editingIndex >= 0) {
-            editActivity(day, editingIndex, { time, description });
+            editActivity(day, editingIndex, { time, description, color });
             setEditingIndex(-1);
             setTime('');
             setDescription('');
+            setColor('#9d7860');
             setActiveIndex(null);
             setNotification(`Edited activity nr. ${editingIndex+1} -> "${description}" @${time} for ${day}`)
             setTimeout(() => setNotification(null), 5000);
@@ -178,11 +182,24 @@ const DayCard = ({ day, date, activities = [], addActivity, editActivity, remove
                         className='week-planner-text-input'
                         placeholder="Description"
                     />
+                    
                     <button onClick={handleAddActivity} className='week-planner-add-button'>Add</button>
                 </div>
+                <input
+                        type="color"
+                        value={color}
+                        onChange={(e) => setColor(e.target.value)}
+                        className='week-planner-color-picker'
+                        title="Choose a background color"
+                    >
+                    </input>
                 <ul className='week-planner-activity-list'>
                     {activities.map((activity, index) => (
-                        <li key={index} className='week-planner-activity-item'>
+                        <li
+                            key={index}
+                            className='week-planner-activity-item'
+                            style={{ backgroundColor: activity.color }}
+                        >
                             <div className='week-planner-activity-content' onClick={() => setActiveIndex(index === activeIndex ? null : index)}>
                                 <strong id='week-planner-strong'>{activity.time}: </strong>{activity.description}
                             </div>
