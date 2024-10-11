@@ -199,8 +199,9 @@ const DayCard = ({ day, date, activities = [], addActivity, editActivity, remove
                             key={index}
                             className='week-planner-activity-item'
                             style={{ backgroundColor: activity.color }}
+                            onClick={() => setActiveIndex(index === activeIndex ? null : index)}
                         >
-                            <div className='week-planner-activity-content' onClick={() => setActiveIndex(index === activeIndex ? null : index)}>
+                            <div className='week-planner-activity-content'>
                                 <strong id='week-planner-strong'>{activity.time}: </strong>{activity.description}
                             </div>
                             {activeIndex === index && (

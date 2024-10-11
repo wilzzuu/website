@@ -58,8 +58,8 @@ function Todo() {
                 </form>
                 <ul className='todo-list'>
                     {tasks.map((task, index) => (
-                    <li key={index} className='todo-list-item'>
-                        <span className='todo-text' onClick={() => setActiveIndex(index === activeIndex ? null : index)}>● {task}</span>
+                    <li key={index} className='todo-list-item' onClick={() => setActiveIndex(index === activeIndex ? null : index)}>
+                        <span className='todo-text'>● {task}</span>
                         {activeIndex === index && (
                             <div className='todo-list-item-buttons'>
                                 {editingIndex === index ? (
