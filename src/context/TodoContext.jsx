@@ -22,8 +22,6 @@ export const TodoProvider = ({ children }) => {
         }
     }, []);
 
-    
-
     const handleInputChange = (e) => {
         setTask(e.target.value); // Update task as user types
     };
@@ -60,7 +58,9 @@ export const TodoProvider = ({ children }) => {
         <TodoContext.Provider
             value={{
                 tasks,
+                setTasks,
                 task,
+                setTask,
                 sizeNotification,
                 clearedNotification,
                 handleInputChange,
