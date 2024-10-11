@@ -64,6 +64,12 @@
     font-size: 20px;
 }
 
+.todo-list-item-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .todo-save-button {
     margin-left: 40px;
     padding: 5px 12px;

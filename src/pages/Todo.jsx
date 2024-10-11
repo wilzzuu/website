@@ -61,7 +61,7 @@ function Todo() {
                     <li key={index} className='todo-list-item'>
                         <span className='todo-text' onClick={() => setActiveIndex(index === activeIndex ? null : index)}>● {task}</span>
                         {activeIndex === index && (
-                            <div>
+                            <div className='todo-list-item-buttons'>
                                 {editingIndex === index ? (
                                     <>
                                         <button className="todo-save-button" onClick={() => handleSave()}>Save</button>
