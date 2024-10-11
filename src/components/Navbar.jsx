@@ -21,6 +21,7 @@ function Navbar() {
                 <li><Link to="/finance">Financial Tracker</Link></li>
                 <li><Link to="/weekplanner">Week Planner</Link></li>
                 <li><Link to="/calendar">Calendar</Link></li>
+                <li><Link to="/notables">Notables</Link></li>
                 <p id="loggedInText">Logged in as: {currentUser.email.split("@website.local")}</p>
                 <LogoutButton />
             </>

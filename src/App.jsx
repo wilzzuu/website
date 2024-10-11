@@ -1,21 +1,26 @@
+/* REACT */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+
+/* CONTEXT */
 import { AuthProvider } from './context/AuthContext';
 import { PomodoroProvider } from './context/PomodoroContext';
 import { TodoProvider } from './context/TodoContext';
-import PrivateRoute from './PrivateRoute';
-import ProtectedRoute from './ProtectedRoute';
 
-import AddTransactionForm from './components/AddTransactionForm';
+/* COMPONENTS */
+
 import Navbar from './components/Navbar';
+import AddProjectForm from './components/AddProjectForm';
+import EditProject from './components/EditProject';
+
+
+/* PAGES */
 import Home from './pages/Home';
 {/*import Register from './pages/Register';*/}
 import Login from './pages/Login'
 import Portfolio from './pages/Portfolio';
-import AddProjectForm from './components/AddProjectForm';
-import EditProject from './components/EditProject';
 import ProjectPage from './pages/ProjectPage';
 import TodoList from './pages/Todo';
 import Pomodoro from './pages/Pomodoro';
@@ -23,7 +28,11 @@ import FinanceTracker from './pages/FinanceTracker';
 import WeekPlanner from './pages/WeekPlanner';
 import Calendar from './pages/Calendar';
 import CV from './pages/CV';
+import Notables from './pages/Notables';
 
+/* OTHER */
+import PrivateRoute from './PrivateRoute';
+import ProtectedRoute from './ProtectedRoute';
 import './index.css';
 
 const queryClient = new QueryClient();
@@ -94,6 +103,14 @@ function App() {
                                 element={
                                     <PrivateRoute>
                                         <Calendar />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/notables"
+                                element={
+                                    <PrivateRoute>
+                                        <Notables />
                                     </PrivateRoute>
                                 }
                             />
