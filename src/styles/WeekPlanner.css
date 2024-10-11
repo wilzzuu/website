@@ -51,8 +51,8 @@
 }
 
 .week-planner-color-picker {
-    width: 80%;
-    height: 24px;
+    width: 100%;
+    height: 22px;
     cursor: pointer;
     margin-top: 5px;
 }
