@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSidebar } from '../context/SidebarContext';
 import githubIcon from '../assets/github.svg';
 import '../styles/Home.css';
@@ -9,6 +9,14 @@ function Home() {
     const { isSidebarCollapsed, setIsSidebarCollapsed, toggleSidebar } = useSidebar();
     const [activeSection, setActiveSection] = useState(0);
     const sections = ['section-0', 'section-1', 'section-2', 'section-3', 'section-4']
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, []);
 
     useEffect(() => {
         const handleScroll = (e) => {
@@ -56,9 +64,7 @@ function Home() {
 
     return (
         <div className='homepage-body'>
-            <div className={`homepage-container ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
-                <div className='sections-container'>
-                    <div className='home-dot-selector'>
+            <div className='home-dot-selector'>
                         {sections.map((_, index) => (
                             <span
                                 key={index}
@@ -67,9 +73,11 @@ function Home() {
                             ></span>
                         ))}
                     </div>
+            <div className={`homepage-container ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
+                <div className='sections-container'>
                     <div id="section-0" className={`section ${activeSection === 0 ? 'active' : ''}`}>
                         <div>
-                            <h1 id="section-0-header">Welcome to my personal website</h1>
+                            <h1 id="section-0-header">Welcome to my website</h1>
                             <p id="section-0-paragraph">The purpose of this website is to share my projects, skills, and journey as a hobbyist developer.</p>
                             <div id="section-0-portfolio-btn">
                                 <button onClick={() => handleNavigation()} className="cta-button">Explore My Work</button>
@@ -82,9 +90,10 @@ function Home() {
                             <div id='section-1-paragraph'>
                                 <p>
                                     I'm a self-taught hobbyist developer with some experience spread across software, web and game development.<br/>
-                                    I have been learning programming and doing personal projects since around 2016, when I was 14 years old,
-                                    using online resources such as Stack Overflow, YouTube tutorials and Quora (next section for details).<br/>
+                                    I have been learning programming and doing some personal projects since 2016, when I was around 14 years old,
+                                    using online resources such as Stack Overflow, YouTube tutorials and Quora.<br/>
                                     I am motivated to learn more about programming and tech related topics and I am pursuing a career where I could apply my skills, while also acquiring new knowledge.<br/>
+                                    Currently my focus is on learning more about web development, which is also why I made this website as a project where I can learn and get creative.<br/>
                                 </p>
                             </div>
                         </div>
@@ -104,10 +113,13 @@ function Home() {
                                 <li>Godot Engine</li>
                                 <li>Unity Engine</li>
                                 <li>Visual Studio 2022</li>
+                                <li>Visual Studio Code</li>
                                 <li>GitHub</li>
                                 <li>Google Firebase</li>
                                 <li>cPanel</li>
                                 <li>ChatGPT</li>
+                                <li>Krita</li>
+                                <li id="section-2-tools-list-link"><a href="https://stackoverflow.com/">stackoverflow.com</a></li>
                                 <li id="section-2-tools-list-link"><a href="https://www.w3schools.com/">w3schools.com</a></li>
                                 <li id="section-2-tools-list-link"><a href="https://freecodecamp.org/learn">freecodecamp.org</a></li>
                             </ul>
@@ -123,7 +135,7 @@ function Home() {
                                     <p id='section-3-project-text'>Weather app built in Python using Custom Tkinter. API calls are used to get weather based on geolocation.</p>
                                     <a id="section-3-project-link" href="/portfolio/weather-app">Read More</a>
                                 </div>
-                                <div id="section-3-project-card">
+                                {/*<div id="section-3-project-card">
                                     <img id="section-3-project-image" src="https://wilzzu.xyz/assets/card_image_placeholder.png" alt="Personal Website Featured"></img>
                                     <h3 id='section-3-project-header'>Personal Website</h3>
                                     <p id='section-3-project-text'>Wesbite built with Vite, deployed on cPanel with a database on Firebase.</p>
@@ -134,7 +146,7 @@ function Home() {
                                     <h3 id='section-3-project-header'>Featured Project 3</h3>
                                     <p id='section-3-project-text'>Placeholder description</p>
                                     <a id="section-3-project-link" href="/portfolio/">Read More</a>
-                                </div>
+                                </div>*/}
                             </div>
                         </div>
                     </div>
