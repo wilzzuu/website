@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useSidebar } from '../context/SidebarContext';
 import toggleIcon from '../assets/layout-sidebar.svg';
@@ -21,11 +21,6 @@ function Sidebar() {
     // State to track if the sidebar is collapsed or expanded
     const { isSidebarCollapsed, setIsSidebarCollapsed, toggleSidebar } = useSidebar();
     const { currentUser } = useAuth();
-    const navigate = useNavigate();
-
-    const handleNavigation = () => {
-        navigate('/login')
-    };
 
     return (
         <div className={`sidebar-container ${isSidebarCollapsed ? 'collapsed' : ''}`}>
