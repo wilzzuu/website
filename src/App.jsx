@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './context/AuthContext';
 import { PomodoroProvider } from './context/PomodoroContext';
 import { TodoProvider } from './context/TodoContext';
+import { SidebarProvider } from './context/SidebarContext';
 
 /* COMPONENTS */
 
@@ -54,6 +55,7 @@ function App() {
                 <Router>
                 <PomodoroProvider>
                 <TodoProvider>
+                <SidebarProvider>
                 <Sidebar />
                     <div>
                         <Routes>
@@ -132,6 +134,7 @@ function App() {
                             />
                         </Routes>
                     </div>
+                    </SidebarProvider>
                     </TodoProvider>
                     </PomodoroProvider>
                 </Router>

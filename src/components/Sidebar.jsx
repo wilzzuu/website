@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/sidebar.css';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useSidebar } from '../context/SidebarContext';
 import toggleIcon from '../assets/layout-sidebar.svg';
+import userIcon from '../assets/user.svg';
 import homeIcon from '../assets/home.svg';
 import portfolioIcon from '../assets/portfolio.svg';
 import cvIcon from '../assets/cv.svg';
@@ -10,75 +12,98 @@ import financeIcon from '../assets/credit-card.svg';
 import todoIcon from '../assets/clipboard.svg';
 import pomodoroIcon from '../assets/clock.svg';
 import notablesIcon from '../assets/notables.svg';
+import LogoutButton from './LogoutButton';
+import LoginButton from './LoginButton';
+import '../styles/sidebar.css';
+import Login from '../pages/Login';
 
 function Sidebar() {
-  // State to track if the sidebar is collapsed or expanded
-  const [isCollapsed, setIsCollapsed] = useState(false);
+    // State to track if the sidebar is collapsed or expanded
+    const { isSidebarCollapsed, setIsSidebarCollapsed, toggleSidebar } = useSidebar();
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
-  // Toggle the sidebar's collapsed state
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+    const handleNavigation = () => {
+        navigate('/login')
+    };
 
-  return (
-    <div className={`sidebar-container ${isCollapsed ? 'collapsed' : ''}`}>
-      <nav className="sideBar">
-        <button className="toggle-button" onClick={toggleSidebar}>
-            <img src={toggleIcon} alt="Toggle Sidebar" />
-        </button>
-        <ul>
-          <li id="homeLink">
-            <Link to="/">
-              <img src={homeIcon} alt="Home" />
-              <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>Home</span>
-            </Link>
-          </li>
-          <li id="portfolioLink">
-            <Link to="/portfolio">
-                <img src={portfolioIcon} alt="Portfolio" />
-                <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>Portfolio</span>
-            </Link>
-          </li>
-          <li id="cvLink">
-            <Link to="/cv">
-                <img src={cvIcon} alt="CV" />
-                <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>CV</span>
-            </Link>
-          </li>
-          <li id="pomodoroLink">
-            <Link to="/pomodoro">
-              <img src={pomodoroIcon} alt="Pomodoro" />
-              <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>Pomodoro</span>
-            </Link>
-          </li>
-          <li id="todoLink">
-            <Link to="/todo">
-              <img src={todoIcon} alt="Todo" />
-              <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>TODO List</span>
-            </Link>
-          </li>
-          <li id="weekplannerLink">
-            <Link to="/weekplanner">
-              <img src={weekplannerIcon} alt="Weekplanner" />
-              <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>Week Planner</span>
-            </Link>
-          </li>
-          <li id="financeLink">
-            <Link to="/finance">
-              <img src={financeIcon} alt="Finance" />
-              <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>Financial Tracker</span>
-            </Link>
-          </li>
-          <li id="notablesLink">
-            <Link to="/notables">
-                <img src={notablesIcon} alt="Notables" />
-                <span className={`link-text ${isCollapsed ? 'hidden' : ''}`}>Notables</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  );
+    return (
+        <div className={`sidebar-container ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+        <nav className="sideBar">
+            <button className="toggle-button" onClick={toggleSidebar}>
+                <img src={toggleIcon} alt="Toggle Sidebar" />
+            </button>
+            <ul>
+            <li id="homeLink">
+                <Link to="/">
+                <img src={homeIcon} alt="Home" />
+                <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Home</span>
+                </Link>
+            </li>
+            <li id="portfolioLink">
+                <Link to="/portfolio">
+                    <img src={portfolioIcon} alt="Portfolio" />
+                    <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Portfolio</span>
+                </Link>
+            </li>
+            <li id="pomodoroLink">
+                <Link to="/pomodoro">
+                <img src={pomodoroIcon} alt="Pomodoro" />
+                <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Pomodoro</span>
+                </Link>
+            </li>
+            <li id="todoLink">
+                <Link to="/todo">
+                <img src={todoIcon} alt="Todo" />
+                <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>TODO List</span>
+                </Link>
+            </li>
+            {currentUser ? (
+                <>
+                    <li id="cvLink">
+                        <Link to="/cv">
+                            <img src={cvIcon} alt="CV" />
+                            <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>CV</span>
+                        </Link>
+                    </li>
+                    
+                    <li id="weekplannerLink">
+                        <Link to="/weekplanner">
+                        <img src={weekplannerIcon} alt="Weekplanner" />
+                        <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Week Planner</span>
+                        </Link>
+                    </li>
+                    <li id="financeLink">
+                        <Link to="/finance">
+                        <img src={financeIcon} alt="Finance" />
+                        <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Financial Tracker</span>
+                        </Link>
+                    </li>
+                    <li id="notablesLink">
+                        <Link to="/notables">
+                            <img src={notablesIcon} alt="Notables" />
+                            <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Notables</span>
+                        </Link>
+                    </li>
+                    <li id="userLink">
+                        <Link to='/login'>
+                            <img src={userIcon} alt="User" />
+                            <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}><LogoutButton /></span>
+                        </Link>
+                    </li>
+                </>
+                ) :(
+                    <li id="userLink">
+                        <Link to='/login'>
+                            <img src={userIcon} alt="User" />
+                            <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}><LoginButton /></span>
+                        </Link>
+                    </li>
+                )}
+            </ul>
+        </nav>
+        </div>
+    );
 }
 
 export default Sidebar;
