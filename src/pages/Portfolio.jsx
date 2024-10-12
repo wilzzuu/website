@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } from 'firebase/firestore';
 import { AuthProvider, useAuth } from '../context/AuthContext';
+import { useSidebar } from '../context/SidebarContext';
 import AddProjectButton from '../components/AddProjectButton';
 import Notification from '../components/Notification';
 import '../styles/Portfolio.css';
-import '../styles/Global.css';
 
 const Portfolio = () => {
+    const { isSidebarCollapsed, setIsSidebarCollapsed, toggleSidebar } = useSidebar();
     const { currentUser } = useAuth();
     const [notification, setNotification] = useState(null);
     const [authStatus, setAuthStatus] = useState('guest');
@@ -96,7 +97,7 @@ const Portfolio = () => {
 
     return (
         <AuthProvider>
-            <div>
+            <div className={`portfolio-page ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
                 {notification && (
                     <Notification
                         message={notification}

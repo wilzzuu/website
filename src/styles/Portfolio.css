@@ -1,7 +1,31 @@
-.portfolio-container {
-    padding: 20px;
-    max-width: 1800px;
+html, body {
+    padding: 0;
+    height: 100%;
     margin: 0 auto;
+    overflow-y: auto;
+}
+
+.portfolio-page {
+    position: relative;
+    bottom: 100px;
+    min-height: 100vh;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    transition: transform 0.4s ease;
+}
+
+.sidebar-open {
+    transform: translateX(250px);
+}
+
+.sidebar-closed {
+    transform: translateX(80px);
+}
+
+.portfolio-container {
+    width: auto;
+    padding: 20px;
 }
 
 .portfolio-header {
@@ -25,8 +49,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    max-width: 100%;
-    margin: auto;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .portfolio-project-card {
