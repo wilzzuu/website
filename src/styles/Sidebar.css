@@ -22,7 +22,7 @@
     background-color:#333;
     color: white;
     height: 100%;
-    padding: 1rem;
+    padding: 12px;
     flex-grow: 1;
 }
   
@@ -81,7 +81,7 @@
 }
 
 /* SVG Size */
-.toggle-button img, #userLink img, #homeLink img, #portfolioLink img, #cvLink img, #statsLink img, #financeLink img, #weekplannerLink img, #todoLink img, #pomodoroLink img, #notablesLink img {
+.toggle-button img, #sidebar-user-btn img, #homeLink img, #portfolioLink img, #cvLink img, #statsLink img, #financeLink img, #weekplannerLink img, #todoLink img, #pomodoroLink img, #notablesLink img {
     width: 24px;
     height: 24px;
 }
@@ -93,6 +93,13 @@
 
 .hidden {
     display: none;
+}
+
+.side-bar-user-span {
+    height: 24px;
+    position: relative;
+    bottom: 4px;
+    margin-left: 8px;
 }
 
 /* Media query for smaller screens */
