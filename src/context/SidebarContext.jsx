@@ -7,7 +7,7 @@ export const useSidebar = () => {
 };
 
 export const SidebarProvider = ({ children }) => {
-    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
   // Toggle the sidebar's collapsed state
   const toggleSidebar = () => {
