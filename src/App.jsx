@@ -11,7 +11,7 @@ import { TodoProvider } from './context/TodoContext';
 
 /* COMPONENTS */
 
-import Navbar from './components/Navbar';
+import Sidebar from './components/sidebar';
 import AddProjectForm from './components/AddProjectForm';
 import EditProject from './components/EditProject';
 
@@ -54,7 +54,7 @@ function App() {
                 <Router>
                 <PomodoroProvider>
                 <TodoProvider>
-                <Navbar />
+                <Sidebar />
                     <div>
                         <Routes>
                             <Route path="/" element={<Home />} />
