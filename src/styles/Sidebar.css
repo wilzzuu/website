@@ -1,0 +1,129 @@
+/* Sidebar Container */
+.sidebar-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 250px;
+    transition: width 0.4s ease;
+    position: sticky;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 1000;
+}
+  
+.sidebar-container.collapsed {
+    width: 80px;
+}
+  
+/* Sidebar Styles */
+.sideBar {
+    background-color:#333;
+    color: white;
+    height: 100%;
+    padding: 1rem;
+    flex-grow: 1;
+}
+  
+.sideBar ul {
+    position: relative;
+    list-style-type: none;
+    padding: 0;
+    top: 2vh;
+}
+  
+.sideBar ul li {
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.sideBar ul li:hover {
+    background-color: #242424;
+    border-radius: 2vh;
+    transition: 0.3s ease;
+}
+
+.sideBar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+  
+/* Font size adjusts when sidebar is collapsed */
+.sidebar-container.collapsed .sideBar ul li a {
+    font-size: 1rem;
+}
+  
+/* Toggle Button */
+.toggle-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.user-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.toggle-button:hover {
+    background-color: #242424;
+    transition: 0.3s ease;
+}
+
+/* SVG Size */
+.toggle-button img, #userLink img, #homeLink img, #portfolioLink img, #cvLink img, #statsLink img, #financeLink img, #weekplannerLink img, #todoLink img, #pomodoroLink img, #notablesLink img {
+    width: 24px;
+    height: 24px;
+}
+
+.link-text {
+    margin-left: 10px;
+    transition: opacity 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .sidebar-container {
+      width: 2vh;
+    }
+  
+    .sidebar {
+      width: 2vh;
+    }
+  
+    .sidebar-container.collapsed {
+      width: 10px;
+    }
+  
+    .sideBar ul li a {
+      font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-container {
+      width: 4vh;
+    }
+    
+    .sidebar-container.collapsed {
+      width: 10px;
+    }
+  
+    .sideBar ul li a {
+      font-size: 0.8rem;
+    }
+}
