@@ -4,7 +4,6 @@ import { db } from '../firebase/firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import '../styles/Global.css';
 import '../styles/EditProject.css';
 
 const EditProject = () => {

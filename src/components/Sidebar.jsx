@@ -14,7 +14,7 @@ import pomodoroIcon from '../assets/clock.svg';
 import notablesIcon from '../assets/notables.svg';
 import LogoutButton from './LogoutButton';
 import LoginButton from './LoginButton';
-import '../styles/sidebar.css';
+import '../styles/Sidebar.css';
 
 function Sidebar() {
     // State to track if the sidebar is collapsed or expanded

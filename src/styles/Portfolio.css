@@ -1,18 +1,10 @@
-html, body {
-    padding: 0;
-    height: 100%;
-    margin: 0 auto;
-    overflow-y: auto;
-}
-
-.portfolio-page {
+.portfolio-container {
     position: relative;
-    bottom: 100px;
-    min-height: 100vh;
-    height: 100%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     transition: transform 0.4s ease;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .sidebar-open {
@@ -21,11 +13,6 @@ html, body {
 
 .sidebar-closed {
     transform: translateX(80px);
-}
-
-.portfolio-container {
-    width: auto;
-    padding: 20px;
 }
 
 .portfolio-header {
@@ -46,11 +33,13 @@ html, body {
 }
 
 .portfolio-grid {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     width: 80%;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .portfolio-project-card {

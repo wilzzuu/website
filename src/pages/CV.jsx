@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/Global.css';
 
 function CV() {
   return (

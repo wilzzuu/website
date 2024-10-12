@@ -6,7 +6,6 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import Carousel from '../components/Carousel';
 import DOMPurify from 'dompurify';
-import '../styles/Global.css';
 import '../styles/ProjectPage.css';
 
 const fetchProject = async(user, projectId) => {

@@ -14,7 +14,7 @@ function Home() {
         document.body.style.overflow = 'hidden';
 
         return () => {
-            document.body.style.overflow = '';
+            document.body.style.overflow = 'auto';
         };
     }, []);
 
@@ -28,7 +28,6 @@ function Home() {
                 if (newSection >= sections.length) newSection = sections.length -1;
                 return newSection;
             });
-            setIsSidebarCollapsed(true);
         };
 
         window.addEventListener('wheel', handleScroll, { passive: false });
@@ -44,7 +43,6 @@ function Home() {
                 setActiveSection((prev) => Math.max(prev -1, 0));
             }
         };
-        setIsSidebarCollapsed(true);
 
         window.addEventListener('keydown', handleKeyDown);
 
@@ -63,16 +61,16 @@ function Home() {
     };
 
     return (
-        <div className='homepage-body'>
+        <div>
             <div className='home-dot-selector'>
-                        {sections.map((_, index) => (
-                            <span
-                                key={index}
-                                className={`dot ${activeSection === index ? 'active-dot' : ''}`}
-                                onClick={() => setActiveSection(index)}
-                            ></span>
-                        ))}
-                    </div>
+                {sections.map((_, index) => (
+                    <span
+                        key={index}
+                        className={`dot ${activeSection === index ? 'active-dot' : ''}`}
+                        onClick={() => setActiveSection(index)}
+                    ></span>
+                ))}
+            </div>
             <div className={`homepage-container ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
                 <div className='sections-container'>
                     <div id="section-0" className={`section ${activeSection === 0 ? 'active' : ''}`}>

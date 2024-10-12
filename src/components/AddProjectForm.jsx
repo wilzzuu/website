@@ -4,7 +4,6 @@ import { db } from '../firebase/firebase';
 import { useAuth } from '../context/AuthContext';
 import ImageUploadForm from '../pages/ImageUploadForm';
 import RichTextEditor from './RichTextEditor';
-import '../styles/Global.css';
 import '../styles/AddProjectForm.css';
 
 const AddProjectForm = () => {

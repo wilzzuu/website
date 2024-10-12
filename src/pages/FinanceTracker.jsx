@@ -6,7 +6,6 @@ import { db } from '../firebase/firebase';
 import Notification from '../components/Notification';
 import FinanceTable from '../components/FinanceTable';
 import AddTransactionForm from '../components/AddTransactionForm';
-import '../styles/Global.css';
 import '../styles/FinanceTracker.css';
 
 function FinanceTracker() {

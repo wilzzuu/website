@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import LogoutButton from './LogoutButton';
 import LoginButton from './LoginButton';
-import '../styles/Global.css';
 import '../styles/Navbar.css';
 
 function Navbar() {

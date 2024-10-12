@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { auth } from '../firebase/firebase'; // Import Firebase auth instance
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Global.css';
 
 export default function Register() {
   const [username, setUsername] = useState('');
