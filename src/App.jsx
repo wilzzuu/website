@@ -8,10 +8,11 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './context/AuthContext';
 import { PomodoroProvider } from './context/PomodoroContext';
 import { TodoProvider } from './context/TodoContext';
+import { SidebarProvider } from './context/SidebarContext';
 
 /* COMPONENTS */
 
-import Navbar from './components/Navbar';
+import Sidebar from './components/sidebar';
 import AddProjectForm from './components/AddProjectForm';
 import EditProject from './components/EditProject';
 
@@ -54,7 +55,8 @@ function App() {
                 <Router>
                 <PomodoroProvider>
                 <TodoProvider>
-                <Navbar />
+                <SidebarProvider>
+                <Sidebar />
                     <div>
                         <Routes>
                             <Route path="/" element={<Home />} />
@@ -132,6 +134,7 @@ function App() {
                             />
                         </Routes>
                     </div>
+                    </SidebarProvider>
                     </TodoProvider>
                     </PomodoroProvider>
                 </Router>
