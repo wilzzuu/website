@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } from 'firebase/firestore';
-import { AuthProvider, useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { useSidebar } from '../context/SidebarContext';
 import AddProjectButton from '../components/AddProjectButton';
 import Notification from '../components/Notification';
@@ -16,6 +16,16 @@ const Portfolio = () => {
     const [authStatus, setAuthStatus] = useState('guest');
     const queryClient = useQueryClient();
     const prevProjectsRef = useRef([]);
+
+    useEffect(() => {
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
+
+        return () => {
+            document.body.style.overflowY = '';
+            document.body.style.overflowX = '';
+        };
+    }, []);
 
     useEffect(() => {
         if (currentUser) {
@@ -96,52 +106,50 @@ const Portfolio = () => {
     if (error) return <p>Error: {error.message || JSON.stringify(error)}</p>;
 
     return (
-        <AuthProvider>
-            <div className={`portfolio-page ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
-                {notification && (
-                    <Notification
-                        message={notification}
-                        style={{position: 'fixed', bottom: '10px', right: '10px', padding: '10px 20px', backgroundColor: '#333', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'}}
-                    />
-                )}
-                <div className='portfolio-container'>
-                    <h1 className='portfolio-header'>My Projects</h1>
-                    <p className='portfolio-header2'>Click on a project for details.</p>
-                    {currentUser ? (
-                        <div className='add-project-button'>
-                            <AddProjectButton  />
-                        </div>
-                    ) : (
-                        <></>
-                    )}
-                    <div className='portfolio-grid'>
-                        {projects.length > 0 ? (
-                            projects.map((project) => (
-                                <div className='portfolio-project-card' key={project.id}>
-                                        <Link className='portfolio-project-link' to={`/portfolio/${project.route}`}>
-                                        <img className='portfolio-project-image' src={project.cardImage} alt={project.title}/>
-                                        <h2 className='portfolio-project-title'>{project.title}</h2>
-                                        <p className='portfolio-project-description'>{project.description}</p>
-                                        </Link>
-                                    <div className='portfolio-project-card-buttons'>
-                                        {authStatus === 'authenticated' && (
-                                            <>
-                                                <button id='is-published-button' onClick={() => togglePublishStatus(project.id, project.isPublished)}>
-                                                    { project.isPublished ? 'Hide' : 'Publish' }
-                                                </button>
-                                                <button id='edit-project-button' onClick={() => handleEditProject(project.id)}>Edit</button>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No projects available.</p>
-                        )}
+        <div>
+            {notification && (
+                <Notification
+                    message={notification}
+                    style={{position: 'fixed', bottom: '10px', right: '10px', padding: '10px 20px', backgroundColor: '#333', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'}}
+                />
+            )}
+            <div className={`portfolio-container ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
+                <h1 className='portfolio-header'>My Projects</h1>
+                <p className='portfolio-header2'>Click on a project for details.</p>
+                {currentUser ? (
+                    <div className='add-project-button'>
+                        <AddProjectButton  />
                     </div>
+                ) : (
+                    <></>
+                )}
+                <div className='portfolio-grid'>
+                    {projects.length > 0 ? (
+                        projects.map((project) => (
+                            <div className='portfolio-project-card' key={project.id}>
+                                    <Link className='portfolio-project-link' to={`/portfolio/${project.route}`}>
+                                    <img className='portfolio-project-image' src={project.cardImage} alt={project.title}/>
+                                    <h2 className='portfolio-project-title'>{project.title}</h2>
+                                    <p className='portfolio-project-description'>{project.description}</p>
+                                    </Link>
+                                <div className='portfolio-project-card-buttons'>
+                                    {authStatus === 'authenticated' && (
+                                        <>
+                                            <button id='is-published-button' onClick={() => togglePublishStatus(project.id, project.isPublished)}>
+                                                { project.isPublished ? 'Hide' : 'Publish' }
+                                            </button>
+                                            <button id='edit-project-button' onClick={() => handleEditProject(project.id)}>Edit</button>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No projects available.</p>
+                    )}
                 </div>
             </div>
-        </AuthProvider>
+        </div>
     );
 };
 
