@@ -1,0 +1,48 @@
+.footer-container {
+    display: flex;
+    background-color: #333;
+    position: sticky;
+    bottom: 0;
+    left: 80px;
+    height: 80px;
+    padding: 10px 10px;
+    transition: transform 0.4s ease;
+    z-index: 10000;
+}
+
+.footer-container.sidebar-open {
+    transform: translateX(170px);
+}
+
+.footer-container.sidbar-closed {
+    transform: translateX(80px);
+}
+
+.footer-content {
+    margin-left: 80px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.footer-copyright {
+    color: inherit;
+}
+
+.githubLink {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+
+.githubLink:hover {
+    text-decoration: underline;
+    color : rgb(255, 0, 0);
+}
+
+.githubIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
