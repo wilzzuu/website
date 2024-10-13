@@ -34,7 +34,7 @@ export const TodoProvider = ({ children }) => {
             return;
         }
         if (task) {
-            setTasks([...tasks, task]); // Add new task to the list
+            setTasks([...tasks, { text: task, completed: false }]); // Add new task to the list
             setTask(''); // Clear the input
             setSizeNotification(null);
         }
@@ -54,6 +54,13 @@ export const TodoProvider = ({ children }) => {
         }
     };
 
+    const toggleCompleteTask = (index) => {
+        const newTasks = tasks.map((task, i) =>
+            i === index ? { ...task, completed: !task.completed } : task
+        );
+        setTasks(newTasks);
+    };
+
     return (
         <TodoContext.Provider
             value={{
@@ -67,6 +74,7 @@ export const TodoProvider = ({ children }) => {
                 addTask,
                 removeTask,
                 clearTasks,
+                toggleCompleteTask,
             }}
         >
             {sizeNotification && (

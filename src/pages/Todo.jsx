@@ -3,7 +3,7 @@ import { useTodo } from '../context/TodoContext';
 import '../styles/Todo.css';
 
 function Todo() {
-    const { tasks, setTasks, task, setTask, sizeNotification, clearedNotification, addTask, removeTask, clearTasks, handleInputChange } = useTodo();
+    const { tasks, setTasks, task, setTask, sizeNotification, clearedNotification, addTask, removeTask, clearTasks, handleInputChange, toggleCompleteTask } = useTodo();
     const [editingIndex, setEditingIndex] = useState(-1);
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -25,7 +25,11 @@ function Todo() {
 
     const handleSave = () => {
         if (editingIndex >= 0) {
-            editTask(editingIndex, task);
+            const updatedTask = {
+                ...tasks[editingIndex],
+                text: task,
+            };
+            editTask(editingIndex, updatedTask);
             setEditingIndex(-1);
             setTask('');
             setActiveIndex(null);
@@ -59,7 +63,7 @@ function Todo() {
                 <ul className='todo-list'>
                     {tasks.map((task, index) => (
                     <li key={index} className='todo-list-item' onClick={() => setActiveIndex(index === activeIndex ? null : index)}>
-                        <span className='todo-text'>● {task}</span>
+                        <span className={`todo-text ${task.completed ? 'completed' : ''}`}>● {task.text}</span>
                         {activeIndex === index && (
                             <div className='todo-list-item-buttons'>
                                 {editingIndex === index ? (
@@ -69,8 +73,11 @@ function Todo() {
                                     </>
                                 ) : (
                                     <>
-                                        <button className="todo-remove-button" onClick={(e) => {e.stopPropagation(); removeTask(index); setActiveIndex(null)}}>Remove</button>
+                                        <button className='todo-remove-button' onClick={(e) => {e.stopPropagation(); removeTask(index); setActiveIndex(null)}}>Remove</button>
                                         <button className='todo-edit-button' onClick={(e) => {e.stopPropagation(); handleEdit(index)}}>Edit</button>
+                                        <button className='todo-done-button' onClick={(e) => {e.stopPropagation(); toggleCompleteTask(index)}}>
+                                            {task.completed ? 'Undo Complete' : 'Complete'}
+                                        </button>
                                     </>
                                 )}
                             </div>
