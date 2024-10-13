@@ -53,88 +53,88 @@ function App() {
     <QueryClientProvider client={queryClient}>
         <AuthProvider>
             <Router>
-            <PomodoroProvider>
-            <TodoProvider>
-            <SidebarProvider>
-            <Sidebar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    {/*<Route path="/register" element={<Register />} />*/}
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/portfolio" element={<Portfolio />} />
-                    <Route path="/portfolio/:projectId" element={<ProjectPage />} />
-                    <Route
-                        path="/todo"
-                        element={
-                            <TodoList />
-                        }
-                    />
-                    <Route
-                        path="/pomodoro"
-                        element={
-                            <Pomodoro />
-                        }
-                    />
-                    <Route 
-                        path="/portfolio/edit-project/:projectId"
-                        element={
-                            <PrivateRoute>
-                                <EditProject />
-                            </PrivateRoute>
-                        } 
-                    />
-                    <Route
-                        path="/portfolio/addproject" 
-                        element={
-                            <PrivateRoute>
-                                <AddProjectForm/>
-                            </PrivateRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/cv"
-                        element={
-                            <PrivateRoute>
-                                <CV />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route 
-                        path="/calendar"
-                        element={
-                            <PrivateRoute>
-                                <Calendar />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route
-                        path="/notables"
-                        element={
-                            <PrivateRoute>
-                                <Notables />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route
-                        path="/finance"
-                        element={
-                            <PrivateRoute>
-                                <FinanceTracker />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route
-                        path="/weekplanner"
-                        element={
-                            <PrivateRoute>
-                                <WeekPlanner />
-                            </PrivateRoute>
-                        }
-                    />
-                </Routes>
-            </SidebarProvider>
-            </TodoProvider>
-            </PomodoroProvider>
+                <SidebarProvider>
+                <PomodoroProvider>
+                <TodoProvider>
+                <Sidebar />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        {/*<Route path="/register" element={<Register />} />*/}
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/portfolio" element={<Portfolio />} />
+                        <Route path="/portfolio/:projectId" element={<ProjectPage />} />
+                        <Route
+                            path="/todo"
+                            element={
+                                <TodoList />
+                            }
+                        />
+                        <Route
+                            path="/pomodoro"
+                            element={
+                                <Pomodoro />
+                            }
+                        />
+                        <Route 
+                            path="/portfolio/edit-project/:projectId"
+                            element={
+                                <PrivateRoute>
+                                    <EditProject />
+                                </PrivateRoute>
+                            } 
+                        />
+                        <Route
+                            path="/portfolio/addproject" 
+                            element={
+                                <PrivateRoute>
+                                    <AddProjectForm/>
+                                </PrivateRoute>
+                            } 
+                        />
+                        <Route 
+                            path="/cv"
+                            element={
+                                <PrivateRoute>
+                                    <CV />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route 
+                            path="/calendar"
+                            element={
+                                <PrivateRoute>
+                                    <Calendar />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/notables"
+                            element={
+                                <PrivateRoute>
+                                    <Notables />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/finance"
+                            element={
+                                <PrivateRoute>
+                                    <FinanceTracker />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="/weekplanner"
+                            element={
+                                <PrivateRoute>
+                                    <WeekPlanner />
+                                </PrivateRoute>
+                            }
+                        />
+                    </Routes>
+                </TodoProvider>
+                </PomodoroProvider>
+                </SidebarProvider>
             </Router>
         </AuthProvider>
     </QueryClientProvider>

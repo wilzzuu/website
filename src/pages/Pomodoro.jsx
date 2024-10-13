@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { usePomodoro } from '../context/PomodoroContext';
+import Footer from '../components/Footer';
 import startIcon from '../assets/play.svg';
 import pauseIcon from '../assets/pause.svg';
 import resetIcon from '../assets/circle-arrow.svg';
@@ -7,7 +8,7 @@ import '../styles/Pomodoro.css'
 
 function Pomodoro() {
     const { time, isRunning, initialLoad, startTime, timerLabel, focusedTime, startTimer, pauseTimer, switchToWork, startShortBreak, startLongBreak, resetToWork } = usePomodoro();
-    
+
     useEffect(() => {
         if (!initialLoad.current) {
             const pomodoroState = {
@@ -38,9 +39,9 @@ function Pomodoro() {
     };
 
     return (
-        <div>
+        <div className='pomodoro-container'>
             <h1 className='pomodoro-header'>Pomodoro</h1>
-            <div className="pomodoro-container">
+            <div className="pomodoro-timer-container">
                 <div id="timer">
                     <h2 className='pomodoro-timer-label'>{timerLabel}</h2>
                     <h1 id='pomodoro-timer'>{formatCountdown(time)}</h1>
@@ -63,6 +64,7 @@ function Pomodoro() {
                     <button onClick={startLongBreak} id="long-break-button">Long Break</button>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }
