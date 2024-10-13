@@ -1,4 +1,10 @@
 .pomodoro-container {
+    position: relative;
+    top: 0;
+    height: 100vh;
+}
+
+.pomodoro-timer-container {
     background-color: #b69c8b;
     padding: 40px;
     border: 1px solid #ddd;
@@ -6,14 +12,15 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-size: 18px;
-    margin: 40px auto;
+    margin: 0 auto;
     width: 800px;
 }
 
 .pomodoro-header {
     text-align: center;
     font-size: 38px;
-    margin: 20px 0 20px;
+    margin: 0 0 20px;
+    padding-top: 20px;
 }
 
 .pomodoro-timer-label {
