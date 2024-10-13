@@ -6,11 +6,11 @@
     position: relative;
 }
 
-.sidebar-open {
+.homepage-container.sidebar-open {
     transform: translateX(250px);
 }
 
-.sidebar-closed {
+.homepage-container.sidebar-closed {
     transform: translateX(80px);
 }
 
