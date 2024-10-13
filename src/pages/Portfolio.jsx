@@ -5,6 +5,7 @@ import { db } from '../firebase/firebase';
 import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { useSidebar } from '../context/SidebarContext';
+import Footer from '../components/Footer';
 import AddProjectButton from '../components/AddProjectButton';
 import Notification from '../components/Notification';
 import '../styles/Portfolio.css';
@@ -123,32 +124,35 @@ const Portfolio = () => {
                 ) : (
                     <></>
                 )}
-                <div className='portfolio-grid'>
-                    {projects.length > 0 ? (
-                        projects.map((project) => (
-                            <div className='portfolio-project-card' key={project.id}>
-                                    <Link className='portfolio-project-link' to={`/portfolio/${project.route}`}>
-                                    <img className='portfolio-project-image' src={project.cardImage} alt={project.title}/>
-                                    <h2 className='portfolio-project-title'>{project.title}</h2>
-                                    <p className='portfolio-project-description'>{project.description}</p>
-                                    </Link>
-                                <div className='portfolio-project-card-buttons'>
-                                    {authStatus === 'authenticated' && (
-                                        <>
-                                            <button id='is-published-button' onClick={() => togglePublishStatus(project.id, project.isPublished)}>
-                                                { project.isPublished ? 'Hide' : 'Publish' }
-                                            </button>
-                                            <button id='edit-project-button' onClick={() => handleEditProject(project.id)}>Edit</button>
-                                        </>
-                                    )}
+                <div className='portfolio-grid-container'>
+                    <div className='portfolio-grid'>
+                        {projects.length > 0 ? (
+                            projects.map((project) => (
+                                <div className='portfolio-project-card' key={project.id}>
+                                        <Link className='portfolio-project-link' to={`/portfolio/${project.route}`}>
+                                        <img className='portfolio-project-image' src={project.cardImage} alt={project.title}/>
+                                        <h2 className='portfolio-project-title'>{project.title}</h2>
+                                        <p className='portfolio-project-description'>{project.description}</p>
+                                        </Link>
+                                    <div className='portfolio-project-card-buttons'>
+                                        {authStatus === 'authenticated' && (
+                                            <>
+                                                <button id='is-published-button' onClick={() => togglePublishStatus(project.id, project.isPublished)}>
+                                                    { project.isPublished ? 'Hide' : 'Publish' }
+                                                </button>
+                                                <button id='edit-project-button' onClick={() => handleEditProject(project.id)}>Edit</button>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No projects available.</p>
-                    )}
+                            ))
+                        ) : (
+                            <p>No projects available.</p>
+                        )}
+                    </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
