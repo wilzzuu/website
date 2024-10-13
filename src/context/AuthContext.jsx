@@ -7,42 +7,42 @@ const AuthContext = createContext();
 
 // Custom hook to use the AuthContext
 export function useAuth() {
-  return useContext(AuthContext);
+    return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  // Listen for changes in authentication state
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user || null);
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, [auth]);
+    // Listen for changes in authentication state
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setCurrentUser(user || null);
+        setLoading(false);
+        });
+        return unsubscribe;
+    }, [auth]);
 
-  // Function to handle login
-  function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
-  }
+    // Function to handle login
+    function login(email, password) {
+        return signInWithEmailAndPassword(auth, email, password);
+    }
 
-  // Function to handle logout
-  function logout() {
-    return signOut(auth);
-  }
+    // Function to handle logout
+    function logout() {
+        return signOut(auth);
+    }
 
-  // Value passed to the Context
-  const value = {
-    currentUser,
-    login,
-    logout
-  };
+    // Value passed to the Context
+    const value = {
+        currentUser,
+        login,
+        logout
+    };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={value}>
+        {!loading && children}
+        </AuthContext.Provider>
+    );
 }

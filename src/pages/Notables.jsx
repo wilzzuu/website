@@ -21,11 +21,11 @@ function Notables() {
     
 
     */
-  return (
-    <div>
-      <h1>Notables</h1>
-    </div>
-  );
+    return (
+        <div>
+        <h1>Notables</h1>
+        </div>
+    );
 }
 
 export default Notables;

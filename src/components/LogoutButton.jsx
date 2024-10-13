@@ -5,23 +5,23 @@ import { signOut } from 'firebase/auth';
 import '../styles/LogoutButton.css';
 
 const LogoutButton = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        navigate('/login');
-      })
-      .catch((error) => {
-        console.error('Error logging out:', error);
-      });
-  };
+    const handleLogout = () => {
+        signOut(auth)
+        .then(() => {
+            navigate('/login');
+        })
+        .catch((error) => {
+            console.error('Error logging out:', error);
+        });
+    };
 
-  return (
-    <button id="logoutButton"  onClick={handleLogout} className='logout-button'>
-      Logout
-    </button>
-  );
+    return (
+        <button id="logoutButton"  onClick={handleLogout} className='logout-button'>
+        Logout
+        </button>
+    );
 };
 
 export default LogoutButton;

@@ -10,14 +10,14 @@ function Pomodoro() {
     
     useEffect(() => {
         if (!initialLoad.current) {
-          const pomodoroState = {
-            time,
-            isRunning,
-            timerLabel,
-            focusedTime,
-            startTime,
-          };
-          localStorage.setItem('pomodoro-timer-state', JSON.stringify(pomodoroState));
+            const pomodoroState = {
+                time,
+                isRunning,
+                timerLabel,
+                focusedTime,
+                startTime,
+            };
+            localStorage.setItem('pomodoro-timer-state', JSON.stringify(pomodoroState));
         }
     }, [time, isRunning, timerLabel, focusedTime, startTime]);
 

@@ -51,60 +51,60 @@ const ProjectPage = () => {
         window.location.href = `/edit-project/${projectId}`;
     };
 
-  if (isLoading) {return <div>Loading project...</div>;}
-  if (error) {return <div>{error}</div>;}
-  
-  return (
-    <div>
-        {currentUser ? (
-            <button className='edit-project-button' onClick={() => handleEditProject(documentId)}>Edit Project</button>
-        ):(
-            <></>
-        )}
-        
-        <div className='project-page-container'>
-        <h1 className='project-title'>{project.title}</h1>
-        <p className='project-description'>{project.description}</p>
-        {project.images ? <Carousel images={ project.images } className='project-image'/> : <p>No images to display</p>}
-        <h1 className='deep-dive-title'>Project Deep Dive</h1>
-        <div dangerouslySetInnerHTML={{ __html: project.deepdive }} className='deep-dive'/>
+    if (isLoading) {return <div>Loading project...</div>;}
+    if (error) {return <div>{error}</div>;}
+    
+    return (
+        <div>
+            {currentUser ? (
+                <button className='edit-project-button' onClick={() => handleEditProject(documentId)}>Edit Project</button>
+            ):(
+                <></>
+            )}
+            
+            <div className='project-page-container'>
+            <h1 className='project-title'>{project.title}</h1>
+            <p className='project-description'>{project.description}</p>
+            {project.images ? <Carousel images={ project.images } className='project-image'/> : <p>No images to display</p>}
+            <h1 className='deep-dive-title'>Project Deep Dive</h1>
+            <div dangerouslySetInnerHTML={{ __html: project.deepdive }} className='deep-dive'/>
+            </div>
         </div>
-    </div>
-  );
+    );
 };
 
 const styles = {
-  container: {
-    padding: '10px',
-    maxWidth: '800px',
-    margin: '0 auto',
-    textAlign: 'center',
-  },
-  desc: {
-    marginTop: '-15px',
-    marginBottom: '30px',
-    fontSize: '20px',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    borderRadius: '8px',
-    marginBottom: '20px',
-  },
-  deepdiveTitle: {
-    marginTop: '80px',
-    fontSize: '36px',
-  },
-  deepdive: {
-    textAlign: 'left',
-    fontSize: '19px',
-    marginBottom: '100px',
-  },
-  editButton: {
-    position: 'fixed',
-    marginTop: '20px',
-    marginLeft: '20px',
-  },
+    container: {
+        padding: '10px',
+        maxWidth: '800px',
+        margin: '0 auto',
+        textAlign: 'center',
+    },
+    desc: {
+        marginTop: '-15px',
+        marginBottom: '30px',
+        fontSize: '20px',
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        borderRadius: '8px',
+        marginBottom: '20px',
+    },
+    deepdiveTitle: {
+        marginTop: '80px',
+        fontSize: '36px',
+    },
+    deepdive: {
+        textAlign: 'left',
+        fontSize: '19px',
+        marginBottom: '100px',
+    },
+    editButton: {
+        position: 'fixed',
+        marginTop: '20px',
+        marginLeft: '20px',
+    },
 };
 
 export default ProjectPage;

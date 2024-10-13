@@ -9,20 +9,20 @@ export const useSidebar = () => {
 export const SidebarProvider = ({ children }) => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
-  // Toggle the sidebar's collapsed state
-  const toggleSidebar = () => {
-    setIsSidebarCollapsed(!isSidebarCollapsed);
-  };
+    // Toggle the sidebar's collapsed state
+    const toggleSidebar = () => {
+        setIsSidebarCollapsed(!isSidebarCollapsed);
+    };
 
-  return (
-    <SidebarContext.Provider
-        value={{
-            isSidebarCollapsed,
-            setIsSidebarCollapsed,
-            toggleSidebar,
-        }}
-    >
-        {children}
-    </SidebarContext.Provider>
-  )
+    return (
+        <SidebarContext.Provider
+            value={{
+                isSidebarCollapsed,
+                setIsSidebarCollapsed,
+                toggleSidebar,
+            }}
+        >
+            {children}
+        </SidebarContext.Provider>
+    )
 }
