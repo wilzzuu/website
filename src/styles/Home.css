@@ -2,6 +2,8 @@
     display: flex;
     height: 100vh;
     transition: transform 0.4s ease;
+    width: 100%;
+    position: relative;
 }
 
 .sidebar-open {
@@ -13,7 +15,6 @@
 }
 
 .sections-container {
-    right: 80px;
     position: relative;
     top: 0;
     flex: 1;

@@ -7,14 +7,6 @@
     padding: 0;
 }
 
-.sidebar-open {
-    transform: translateX(250px);
-}
-
-.sidebar-closed {
-    transform: translateX(80px);
-}
-
 .portfolio-header {
     text-align: center;
     font-size: 36px;
