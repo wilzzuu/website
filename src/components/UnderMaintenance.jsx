@@ -14,8 +14,11 @@ const Maintenance = ({ style_, state=false }) => {
 
 const styles = {
     container: {
+        position: 'fixed',
+        top: '0',
+        left: '0',
         width: '100%',
-        textAlign : 'center',
+        textAlign: 'center',
         padding: '0.02rem 0',
         backgroundColor: '#f14848',
         zIndex: 10000,
