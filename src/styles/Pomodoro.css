@@ -39,11 +39,15 @@
     margin-top: -40px;
 }
 
+.pomodoro-container #player-buttons {
+    margin-bottom: 8px;
+}
+
 .pomodoro-container #start-button, #pause-button, #reset-button {
     width: 60px;
     margin-left: 8px;
 }
 
-.pomodoro-container #work-button, #short-break-button, #long-break-button {
+.pomodoro-container #short-work-button, #long-work-button, #short-break-button, #long-break-button {
     margin-left: 8px;
 }
