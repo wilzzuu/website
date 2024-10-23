@@ -40,18 +40,7 @@ function Sidebar() {
                         <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Portfolio</span>
                     </Link>
                 </li>
-                <li id="pomodoroLink">
-                    <Link to="/pomodoro">
-                    <img src={pomodoroIcon} alt="Pomodoro" />
-                    <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Pomodoro</span>
-                    </Link>
-                </li>
-                <li id="todoLink">
-                    <Link to="/todo">
-                    <img src={todoIcon} alt="Todo" />
-                    <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>TODO List</span>
-                    </Link>
-                </li>
+                
                 {currentUser ? (
                     <>
                         <li id="cvLink">
@@ -60,7 +49,18 @@ function Sidebar() {
                                 <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>CV</span>
                             </Link>
                         </li>
-                        
+                        <li id="pomodoroLink">
+                            <Link to="/pomodoro">
+                            <img src={pomodoroIcon} alt="Pomodoro" />
+                            <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>Pomodoro</span>
+                            </Link>
+                        </li>
+                        <li id="todoLink">
+                            <Link to="/todo">
+                            <img src={todoIcon} alt="Todo" />
+                            <span className={`link-text ${isSidebarCollapsed ? 'hidden' : ''}`}>TODO List</span>
+                            </Link>
+                        </li>
                         <li id="weekplannerLink">
                             <Link to="/weekplanner">
                             <img src={weekplannerIcon} alt="Weekplanner" />
