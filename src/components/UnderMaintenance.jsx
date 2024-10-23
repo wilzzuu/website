@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Maintenance = ({ state=false }) => {
+const Maintenance = ({ style_, state=false }) => {
     return (
-        <div style={styles.container}>
+        <div style={style_ ? style_ : styles.container}>
             {state ? (
             <p>
             This page is under development, it might not function as expected.
