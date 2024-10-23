@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase/firebase';
-import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc, onSnapshot } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { useSidebar } from '../context/SidebarContext';
 import Footer from '../components/Footer';
@@ -43,9 +43,9 @@ const Portfolio = () => {
             const projectRef = collection(db, 'projects');
             let q;
             if (authStatus === 'authenticated') {
-                q = query(projectRef, limit(10));
+                q = query(projectRef);
             } else {
-                q = query(projectRef, where('isPublished', '==', true), limit(10));
+                q = query(projectRef, where('isPublished', '==', true));
             };
 
             const querySnapshot = await getDocs(q);
@@ -66,9 +66,9 @@ const Portfolio = () => {
             const projectRef = collection(db, 'projects');
             let q;
             if (authStatus === 'authenticated') {
-                q = query(projectRef, limit(10));
+                q = query(projectRef);
             } else {
-                q = query(projectRef, where('isPublished', '==', true), limit(10));
+                q = query(projectRef, where('isPublished', '==', true));
             };
 
             const unsubscribe = onSnapshot(q, (snapshot) => {
