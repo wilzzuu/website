@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { usePomodoro } from '../context/PomodoroContext';
 import Footer from '../components/Footer';
+import Maintenance from '../components/UnderMaintenance';
 import startIcon from '../assets/play.svg';
 import pauseIcon from '../assets/pause.svg';
 import resetIcon from '../assets/circle-arrow.svg';
 import '../styles/Pomodoro.css'
 
 function Pomodoro() {
-    const { time, isRunning, initialLoad, startTime, timerLabel, focusedTime, startTimer, pauseTimer, switchToWork, startShortBreak, startLongBreak, resetToWork } = usePomodoro();
+    const { time, isRunning, initialLoad, startTime, timerLabel, focusedTime, startTimer, pauseTimer, startShortFocus, startLongFocus, startShortBreak, startLongBreak, resetToWork, testTimer } = usePomodoro();
 
     useEffect(() => {
         if (!initialLoad.current) {
@@ -29,13 +30,13 @@ function Pomodoro() {
         return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
-    // Format the total focused time as Xh Ymins
+    // Format the total focused time as X-hours Y-minutes Z-seconds
     const formatFocusedTime = (time) => {
         const hours = Math.floor(time / 3600); // Calculate total hours
         const minutes = Math.floor((time % 3600) / 60); // Calculate total minutes
         const seconds = time % 60; // Calculate total seconds;
 
-        return `${hours}h ${minutes}m ${seconds}s`; // Always include hours
+        return `${hours}h ${minutes}m ${seconds}s`;
     };
 
     return (
@@ -49,19 +50,22 @@ function Pomodoro() {
                 <div id="focused-time">
                     <h3>Total Focused Time: {formatFocusedTime(focusedTime)}</h3>
                 </div>
-                <div id="section-container">
-                    <button onClick={startTimer} id="start-button">
-                        <img src={startIcon} alt="Start" />
-                    </button>
-                    <button onClick={pauseTimer} id="pause-button">
-                        <img src={pauseIcon} alt="Pause" />
-                    </button>
-                    <button onClick={resetToWork} id="reset-button">
-                        <img src={resetIcon} alt="Reset" />
-                    </button>
-                    <button onClick={switchToWork} id="work-button">Focus</button>
-                    <button onClick={startShortBreak} id="short-break-button">Short break</button>
-                    <button onClick={startLongBreak} id="long-break-button">Long Break</button>
+                <div id="buttons-container">
+                    <div id="player-buttons">
+                        <button onClick={startTimer} id="start-button">
+                            <img src={startIcon} alt="Start" />
+                        </button>
+                        <button onClick={pauseTimer} id="pause-button">
+                            <img src={pauseIcon} alt="Pause" />
+                        </button>
+                        <button onClick={resetToWork} id="reset-button">
+                            <img src={resetIcon} alt="Reset" />
+                        </button>
+                    </div>
+                    <button onClick={startShortFocus} id="short-work-button">25:00 Focus</button>
+                    <button onClick={startLongFocus} id="long-work-button">45:00 Focus</button>
+                    <button onClick={startShortBreak} id="short-break-button">05:00 Break</button>
+                    <button onClick={startLongBreak} id="long-break-button">15:00 Break</button>
                 </div>
             </div>
             <Footer/>

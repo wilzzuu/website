@@ -14,7 +14,7 @@ export const usePomodoro = () => {
 export const PomodoroProvider = ({ children }) => {
     const [time, setTime] = useState(25 * 60); // 25 minutes in seconds
     const [isRunning, setIsRunning] = useState(false);
-    const [timerLabel, setTimerLabel] = useState('Focus');
+    const [timerLabel, setTimerLabel] = useState('Short Focus');
     const [intervalId, setIntervalId] = useState(null);
     const [focusedTime, setFocusedTime] = useState(0); // Total focused time in seconds
     const [startTime, setStartTime] = useState(null);
@@ -30,7 +30,7 @@ export const PomodoroProvider = ({ children }) => {
         if (savedState) {
             setTime(savedState.time || 25 * 60);
             setIsRunning(savedState.isRunning || false);
-            setTimerLabel(savedState.timerLabel || 'Focus');
+            setTimerLabel(savedState.timerLabel || 'Short Focus');
             setFocusedTime(savedState.focusedTime || 0);
             setStartTime(savedState.startTime || null);
         }
@@ -83,10 +83,17 @@ export const PomodoroProvider = ({ children }) => {
     };
 
     // Switch to work state without resetting focused time
-    const switchToWork = () => {
+    const startShortFocus = () => {
         pauseTimer();
         setTime(25 * 60);
-        setTimerLabel('Focus');
+        setTimerLabel('Short Focus');
+        setIsRunning(false);
+    };
+
+    const startLongFocus = () => {
+        pauseTimer();
+        setTime(45 * 60);
+        setTimerLabel('Long Focus');
         setIsRunning(false);
     };
 
@@ -110,9 +117,16 @@ export const PomodoroProvider = ({ children }) => {
     const resetToWork = () => {
         pauseTimer();
         setTime(25 * 60);
-        setTimerLabel('Focus');
+        setTimerLabel('Short Focus');
         setIsRunning(false);
     };
+
+    const testTimer = () => {
+        pauseTimer();
+        setTime(1 * 60);
+        setTimerLabel('Timer Test');
+        setIsRunning(false);
+    }
 
     // Cleanup the interval on component unmount
     useEffect(() => {
@@ -129,10 +143,12 @@ export const PomodoroProvider = ({ children }) => {
                 focusedTime,
                 startTimer,
                 pauseTimer,
-                switchToWork,
+                startShortFocus,
+                startLongFocus,
                 startShortBreak,
                 startLongBreak,
                 resetToWork,
+                testTimer,
             }}
         >
             {notification && (
