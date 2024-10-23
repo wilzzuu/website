@@ -63,15 +63,7 @@ function Home() {
 
     return (
         <div>
-            <Maintenance style_={{
-                position: 'fixed',
-                top: '0',
-                left: '0',
-                width: '100%',
-                textAlign: 'center',
-                padding: '0.02rem 0',
-                backgroundColor: '#f14848',
-                zIndex: 10000,}} state={true} />
+            <Maintenance state={true} />
             <div className='home-dot-selector'>
                 {sections.map((_, index) => (
                     <span
