@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSidebar } from '../context/SidebarContext';
+import Maintenance from '../components/UnderMaintenance';
 import githubIcon from '../assets/github.svg';
 import '../styles/Home.css';
 

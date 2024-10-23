@@ -16,7 +16,6 @@ import Sidebar from './components/Sidebar';
 import AddProjectForm from './components/AddProjectForm';
 import EditProject from './components/EditProject';
 
-
 /* PAGES */
 import Home from './pages/Home';
 {/*import Register from './pages/Register';*/}
@@ -58,21 +57,45 @@ function App() {
                 <TodoProvider>
                 <Sidebar />
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route 
+                            path="/"
+                            element={
+                                <Home />
+                            }
+                        />
                         {/*<Route path="/register" element={<Register />} />*/}
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/portfolio" element={<Portfolio />} />
-                        <Route path="/portfolio/:projectId" element={<ProjectPage />} />
+                        <Route
+                            path="/login"
+                            element={
+                                <Login />
+                            }
+                        />
+                        <Route
+                            path="/portfolio"
+                            element={
+                                <Portfolio />
+                            } 
+                        />
+                        <Route 
+                            path="/portfolio/:projectId" 
+                            element={
+                                <ProjectPage />
+                            }
+                        />
                         <Route
                             path="/todo"
                             element={
+                                <PrivateRoute>
                                 <TodoList />
+                                </PrivateRoute>
                             }
                         />
                         <Route
                             path="/pomodoro"
                             element={
+                                <PrivateRoute>
                                 <Pomodoro />
+                                </PrivateRoute>
                             }
                         />
                         <Route 

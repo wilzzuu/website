@@ -6,6 +6,7 @@ import { collection, query, where, getDocs, updateDoc, doc, limit, onSnapshot } 
 import { useAuth } from '../context/AuthContext';
 import { useSidebar } from '../context/SidebarContext';
 import Footer from '../components/Footer';
+import Maintenance from '../components/UnderMaintenance';
 import AddProjectButton from '../components/AddProjectButton';
 import Notification from '../components/Notification';
 import '../styles/Portfolio.css';
@@ -115,6 +116,7 @@ const Portfolio = () => {
                 />
             )}
             <div className={`portfolio-container ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
+                <Maintenance state={true} />
                 <h1 className='portfolio-header'>My Projects</h1>
                 <p className='portfolio-header2'>Click on a project for details.</p>
                 {currentUser ? (
