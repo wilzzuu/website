@@ -115,8 +115,9 @@ const Portfolio = () => {
                     style={{position: 'fixed', bottom: '10px', right: '10px', padding: '10px 20px', backgroundColor: '#333', color: '#fff', borderRadius: '5px', zIndex: 1000, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'}}
                 />
             )}
+            <Maintenance state={true} />
             <div className={`portfolio-container ${isSidebarCollapsed ? 'sidebar-closed': 'sidebar-open'}`}>
-                <Maintenance state={true} />
+                
                 <h1 className='portfolio-header'>My Projects</h1>
                 <p className='portfolio-header2'>Click on a project for details.</p>
                 {currentUser ? (
